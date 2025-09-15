@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>INFYRA — RenderBlind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INFYRA — Cyberpunk Hero</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css">
@@ -18,10 +18,32 @@
       <li><a href="../../index.html">Home</a></li>
       <li><a href="../recurisa/index.html">Previous</a></li>
       <li><a href="../botforage/index.html">Next</a></li>
-      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdxbTuvcRBLIDtIuNynqaqBUpdIayfVh0dERJiPpc42uP9o7Q/viewform?usp=dialog" target="_blank" class="btn">Register</a></li>
+      <li><a href="https://forms.gle/yourformlink" target="_blank" class="btn">Register</a></li>
     </ul>
   </div>
 </nav>
+<!-- Navigation Bar -->
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">INFYRA</div>
+
+    <!-- Hamburger button (shows only on mobile) -->
+    <button class="hamburger" aria-label="Menu">
+      ☰
+    </button>
+
+    <!-- Nav links (hidden on mobile until clicked) -->
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../recurisa/index.html">Previous</a></li>
+      <li><a href="../botforage/index.html">Next</a></li>
+      <li><a href="https://forms.gle/yourformlink" target="_blank" class="btn">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+
   <!-- Intro Overlay -->
 <!-- Intro Wireframe Morph -->
 <div id="intro-wireframe">
@@ -53,6 +75,7 @@
       <div class="face bottom">TECH</div>
     </div>
   </div>-->
+
 
   
   <section class="hero">
@@ -91,7 +114,7 @@ additional challenge conducted offline.
         <div class="container" style="--hue: 220">
           <!-- Single Event Popup Hologram -->
           <div class="event-popup-single">
-            <img src="images/poster.jpg" alt="Main Event">
+            <img src="images/render blind poster.jpg" alt="Main Event">
             <span>UI/UX Showdown</span>
           </div>
         
@@ -117,14 +140,14 @@ additional challenge conducted offline.
     <div class="grid-floor"></div>
   </section>
 
-  <footer>
+  <!-- <footer>
     <div>© 2025 INFYRA</div>
     <div class="links">
       <a href="#">Event Guide</a>
       <a href="#">Schedule</a>
       <a href="#">Contact</a>
     </div>
-  </footer>
+  </footer> -->
   <script>
     document.addEventListener("mousemove", e => {
       const particles = document.querySelectorAll(".particles span");
@@ -133,10 +156,18 @@ additional challenge conducted offline.
   
       particles.forEach((p, i) => {
         let depth = (i % 6) + 1; // different depths
-        p.style.marginLeft = `${x / depth}px`;
-        p.style.marginTop = `${y / depth}px`
+p.style.marginLeft = `${x / depth}px`;
+p.style.marginTop = `${y / depth}px`;
       });
     });
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  });
     
   </script>
 </body>

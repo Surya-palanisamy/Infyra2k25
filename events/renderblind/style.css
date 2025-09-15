@@ -14,6 +14,7 @@ body {
   font-family: Inter, system-ui, sans-serif;
   background: #0b0f17;
   overflow-x: hidden;
+  color: white;
 }
 /* ====== Wireframe Intro ====== */
 #intro-wireframe {
@@ -153,6 +154,7 @@ body {
     radial-gradient(1200px 600px at 70% 80%, rgba(255,123,0,.06), transparent 60%),
     radial-gradient(800px 400px at 30% 20%, rgba(51,225,255,.05), transparent 60%),
     #060913;
+     padding-top: 80px;
 }
 .hero::before {
   content: "";
@@ -206,6 +208,7 @@ body {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
   text-shadow: 0 0 18px rgba(51,225,255,.4),
                0 0 42px rgba(255,123,0,.25);
+               bottom: -15px;
 }
 /* ====== Glitch / Hologram Animation ====== */
 @keyframes glitch {
@@ -682,6 +685,7 @@ footer a:hover { color: white; }
   background: rgba(10,14,21,0.6);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  
 }
 
 .nav-container {
@@ -731,5 +735,87 @@ footer a:hover { color: white; }
   }
   .nav-logo {
     font-size: 1.2rem;
+  }
+}
+/* Fix overlap for small screens */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px; /* spacing between stacked items */
+  }
+
+  .brand {
+    position: relative; /* remove absolute positioning */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .brand .title {
+    font-size: 2rem; /* shrink font for mobile */
+  }
+
+  .holo-wrapper {
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .card {
+    margin-top: 20px;
+  }
+}
+
+/* Even smaller devices (phones < 425px) */
+@media (max-width: 425px) {
+  .brand .title {
+    font-size: 1.6rem;
+  }
+  .container {
+    width: 180px;
+    height: 180px;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}/* Hamburger button */
+/* Hamburger button */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #00ffe0;
+  cursor: pointer;
+}
+
+/* Mobile navbar */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    z-index: 1001;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background: rgba(10,14,21,0.95);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    display: none; /* hidden initially */
+  }
+
+  .nav-links.show {
+    display: flex; /* appears when toggled */
   }
 }
