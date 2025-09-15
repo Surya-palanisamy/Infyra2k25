@@ -2,6 +2,7 @@
 document.getElementById("revealBtn").addEventListener("click", () => {
   document.getElementById("posterImg").classList.remove("hidden");
   document.getElementById("registerBelow").classList.remove("hidden");
+  document.getElementById("revealBtn").classList.add("hidden");
 });
 
 // Intro sequence then show site content

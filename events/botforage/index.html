@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BotForge</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
-</head>
-<body>
-  <canvas id="networkCanvas"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BotForge</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="networkCanvas"></canvas>
 
-  <!-- Fullscreen Intro Overlay -->
-  <div id="introOverlay" class="intro-overlay">
-    <div id="chatIntro" class="chat-intro">
-      <div class="chat-bubble">🤖 Hello Human, welcome to <b>BotForge</b>.</div>
-      <div class="chat-bubble">💡 The Conversational Arena.</div>
-      <div class="chat-bubble">“Code the mind. Create the voice.”</div>
+    <!-- Fullscreen Intro Overlay -->
+    <div id="introOverlay" class="intro-overlay">
+      <div id="chatIntro" class="chat-intro">
+        <div class="chat-bubble">
+          🤖 Hello Human, welcome to <b>BotForge</b>.
+        </div>
+        <div class="chat-bubble">💡 The Conversational Arena.</div>
+        <div class="chat-bubble">“Code the mind. Create the voice.”</div>
+      </div>
     </div>
-  </div>
 
-  <!-- Navbar -->
-  <nav class="navbar glass">
-    <div class="nav-left">
-      <a href="../../index.html">Home</a>
-      <a href="../renderblind/index.html">Previous</a>
-      <a href="../echelon conflux/index.html">Next</a>
-      
-      <a href="#registerBelow">Register</a>
-    </div>
-    <div class="nav-right">
-      <h1 class="logo">BOTFORGE</h1>
-      <button class="register-btn">Register</button>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar glass">
+      <div class="nav-left">
+        <a href="../../index.html">Home</a>
+        <a href="../renderblind/index.html">Previous</a>
+        <a href="../echelon conflux/index.html">Next</a>
 
-  <!-- Poster Reveal Section -->
-  <section class="poster-section glass">
-    <button id="revealBtn" class="reveal-btn">Reveal Poster</button>
-    <img id="posterImg" src="../../img/event3.jpg" alt="BotForge Poster" class="poster hidden"/>
-    <button id="registerBelow" class="register-btn hidden">Register</button>
-  </section>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSe9S3GWqTnZVdHNgS2ZVIlXW_lZekOommxqFq6kYhlJnOhIxA/viewform?usp=header"
+          >Register</a
+        >
+      </div>
+      <div class="nav-right">
+        <h1 class="logo">BOTFORGE</h1>
+        <button class="register-btn">Register</button>
+      </div>
+    </nav>
 
-  <!-- Main Content -->
-  <main class="content glass">
-    <!-- Left: Event Details -->
-    <section id="concept">
-      <h2>Event Concept</h2>
-      <p>
-        BotForge is a single-round technical sprint where participants build intelligent,
-        domain-specific chatbots using AI or rule-based logic. In just 75 minutes, teams
-        must design and implement a fully functional chatbot capable of handling real-world
-        user interaction.
-      </p>
+    <!-- Poster Reveal Section -->
+    <section class="poster-section glass">
+      <button id="revealBtn" class="reveal-btn">Reveal Poster</button>
+      <img
+        id="posterImg"
+        src="../../img/event3.jpg"
+        alt="BotForge Poster"
+        class="poster hidden"
+      />
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSe9S3GWqTnZVdHNgS2ZVIlXW_lZekOommxqFq6kYhlJnOhIxA/viewform?usp=header"
+      >
+        <button id="registerBelow" class="register-btn hidden">Register</button>
+      </a>
     </section>
 
-    <article id="rules">
-      <h2>Event Instructions</h2>
-      <ul>
-        <li>Teams of 3–4 participants.</li>
-        <li>Maximum of 15 teams.</li>
-        <li>Duration: 75 minutes.</li>
-        <li>Build a chatbot using AI or rule-based logic.</li>
-        <li>Focus on conversational design and real-world problem solving.</li>
-      </ul>
-    </article>
+    <!-- Main Content -->
+    <main class="content glass">
+      <!-- Left: Event Details -->
+      <section id="concept">
+        <h2>Event Concept</h2>
+        <p>
+          BotForge is a single-round technical sprint where participants build
+          intelligent, domain-specific chatbots using AI or rule-based logic. In
+          just 75 minutes, teams must design and implement a fully functional
+          chatbot capable of handling real-world user interaction.
+        </p>
+      </section>
 
-    <!-- Right: Code Example -->
-    <aside class="code-box">
-<pre>
+      <article id="rules">
+        <h2>Event Instructions</h2>
+        <ul>
+          <li>Teams of 3–4 participants.</li>
+          <li>Maximum of 15 teams.</li>
+          <li>Duration: 75 minutes.</li>
+          <li>Build a chatbot using AI or rule-based logic.</li>
+          <li>
+            Focus on conversational design and real-world problem solving.
+          </li>
+        </ul>
+      </article>
+
+      <!-- Right: Code Example -->
+      <aside class="code-box">
+        <pre>
 <span class="comment">// Conversational Snippet</span>
 bot: "Hello! How can I assist you today?"
 
@@ -80,9 +99,9 @@ user: "What are the team rules?"
 bot: "Teams of 3–4, max 15 teams.
       Good luck!"
 </pre>
-    </aside>
-  </main>
+      </aside>
+    </main>
 
-  <script src="scripts.js"></script>
-</body>
+    <script src="scripts.js"></script>
+  </body>
 </html>
