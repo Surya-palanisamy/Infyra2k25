@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Royal Rumble</title>
+  <!-- Google Fonts Karantina -->
+  <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root { --overlay: rgba(0,0,0,.45); }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html, body { height: 100%; margin: 0; }
+    body { color: #fff; font: 20px/1.6 'Karantina', cursive; background: #000; }
+
+    .wrapper { position: relative; height: 100svh; min-height: 420px; overflow: hidden; }
+    .video-bg { position: absolute; inset: 0; }
+    .video-bg video {
+      position: absolute; top: 50%; left: 50%;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(0.9) contrast(1.05);
+    }
+    .overlay { position: absolute; inset: 0; background: var(--overlay); }
+
+    /* Back Button */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 22px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
+      text-decoration: none;
+      z-index: 5;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+
+    /* Top Center Heading */
+    .top-heading {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 5rem;
+      font-weight: bold;
+      color: #fff;
+      font-family: 'Karantina', cursive;
+      text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 25px rgba(255,255,255,0.7);
+      z-index: 4;
+      text-align: center;
+    }
+
+    /* Left side description */
+    .left-description {
+      position: absolute;
+      top: 150px;
+      left: 40px;
+      max-width: 900px;
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #fff;
+      font-family: 'Karantina', cursive;
+      padding: 30px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      z-index: 4;
+      overflow-y: auto;
+      max-height: 70vh;
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+
+    /* Highlights */
+    .highlight {
+      color: #ff416c;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(255,65,108,0.8);
+    }
+
+    /* Grid layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin: 25px 0;
+    }
+
+    /* Info blocks */
+    .info-block {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.7rem;
+    }
+    .info-block:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 28px rgba(255,65,108,0.6);
+    }
+
+    .info-block h2 {
+      color: #ff4b2b;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      text-decoration: underline;
+    }
+    .info-block h3 {
+      font-size: 1.4rem;
+      margin: 12px 0 8px;
+      color: #ffd700;
+    }
+    .info-block ul {
+      list-style: none;
+      padding-left: 10px;
+    }
+    .info-block ul li {
+      margin-bottom: 8px;
+      font-size: 1.9rem;
+    }
+
+    /* Register Button */
+    .register-btn {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 10px 25px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      border-radius: 30px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255, 65, 108, 0.5);
+      width: fit-content;
+    }
+    .register-btn:hover {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      transform: scale(1.05);
+      box-shadow: 0 6px 25px rgba(255, 65, 108, 0.7);
+    }
+
+    /* Right side poster */
+    .right-poster {
+      position: absolute;
+      top: 10px;
+      right: 40px;
+      max-width: 380px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 45px rgba(0,0,0,0.6);
+      z-index: 4;
+    }
+    .right-poster img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .overlay { background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.25)); }
+      .left-description { max-width: 85%; font-size: 1.1rem; left: 20px; }
+      .right-poster { display: none; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .top-heading { font-size: 3rem; top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="video-bg">
+      <video autoplay muted loop playsinline poster="poster.jpg">
+        <source src="img/bg.mp4" type="video/mp4" />
+        Your browser does not support the HTML5 video tag.
+      </video>
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="history.back()">← Back</button>
+
+    <!-- Top Center Heading -->
+    <div class="top-heading">Royal Rumble</div>
+
+    <!-- Left Side Description -->
+    <div class="left-description">
+      <p class="tagline"><i class="fa-solid fa-gamepad"></i> <em>“Drop in. Gear up. Rule the battlefield.”</em></p>
+
+      <div class="info-block">
+        <h2><i class="fa-solid fa-book-open"></i> Event Concept</h2>
+        <p>
+          Royal Rumble: Firefight Edition is an adrenaline-pumping Free Fire tournament where squads
+          compete to be the <span class="highlight">last team standing</span>. Strategy, fast-paced action, and teamwork
+          decide who takes the crown. With a small entry fee, players can showcase their skills and win
+          exciting prizes!
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-block">
+          <h2><i class="fa-solid fa-users"></i> Team Formation</h2>
+          <ul>
+            <li>Teams of 4 players</li>
+            <li>Max <span class="highlight">24 teams</span></li>
+            <li>Entry Fee: <span class="highlight">₹50</span> per team</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h2><i class="fa-solid fa-trophy"></i> Prize Distribution</h2>
+          <ul>
+            <li>1st Place: 50%</li>
+            <li>2nd Place: 30%</li>
+            <li>3rd Place: 20%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h2><i class="fa-solid fa-scroll"></i> Event Format</h2>
+        <p><b>Qualifier Round:</b> 3 matches → Top 8 teams advance</p>
+        <p><b>Final Round:</b> 3–5 matches → Total points decide champion</p>
+        <h3><i class="fa-solid fa-crosshairs"></i> Scoring System</h3>
+        <p>
+          🥇 <span class="highlight">25 pts</span> | 🥈 20 pts | 🥉 16 pts | Kill = <span class="highlight">2 pts</span>
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-block">
+          <h2><i class="fa-solid fa-clock"></i> Timeframe</h2>
+          <ul>
+            <li>Total: 4–5 hours</li>
+            <li>Each match: ~20 mins</li>
+            <li>Breaks between rounds</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h2><i class="fa-solid fa-scale-balanced"></i> Fair Play</h2>
+          <ul>
+            <li>Anti-cheat strictly enforced</li>
+            <li>Results verified with game data</li>
+            <li>Judges’ decisions are final</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h2><i class="fa-solid fa-thumbtack"></i> Participant Guidelines</h2>
+        <ul>
+          <li>Register & pay before deadline</li>
+          <li>Use consistent team names & IDs</li>
+          <li>Be on time for lobby setup</li>
+          <li>Maintain sportsmanship</li>
+        </ul>
+      </div>
+
+      <!-- Register Button -->
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCKIMSBPSGYBlaBAKoIiWn_DJpeJvVDZL_NueER4-dEXIhKw/viewform?usp=dialog" class="register-btn">
+        <i class="fa-solid fa-bolt"></i> Register Now
+      </a>
+    </div>
+
+    <!-- Right Side Poster -->
+    <div class="right-poster">
+      <img src="img/poster.jpeg" alt="Royal Rumble Poster" />
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #FFD700;
+  overflow-x: hidden;
+  text-shadow: 0 0 3px rgba(255,215,0,0.4),
+               0 0 10px rgba(255,215,0,0.1);
+  line-height: 1.6;
+}
+
+/* ---------- CANVAS BACKGROUND ---------- */
+#networkCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- GLASSMORPHISM ---------- */
+.glass {
+  background: rgba(255, 215, 0, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 215, 0, 0.2);
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.nav-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nav-left a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+.nav-left a:hover {
+  color: #FFF5B0;
+}
+
+/* ---------- METALLIC GOLD ANIMATION ---------- */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ---------- LOGO ---------- */
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #FFD700 0%, #FFB600 25%, #FFF5B0 50%, #FFB600 75%, #FFD700 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+/* ---------- BUTTONS ---------- */
+.register-btn, .reveal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: black;
+  background: linear-gradient(90deg, #FFD700 0%, #FFB600 25%, #FFF5B0 50%, #FFB600 75%, #FFD700 100%);
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+
+.register-btn:hover, .reveal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+/* ---------- POSTER SECTION ---------- */
+.poster-section {
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 800px;
+  width: 95%;
+}
+
+.poster {
+  margin-top: 20px;
+  max-width: 100%;
+  border-radius: 12px;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+  transition: opacity 1s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 50px auto;
+  padding: 30px;
+  max-width: 1200px;
+  width: 95%;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #FFD700 0%, #FFB600 25%, #FFF5B0 50%, #FFB600 75%, #FFD700 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+ul {
+  list-style: square;
+  margin-left: 20px;
+}
+
+/* ---------- CODE BOX ---------- */
+.code-box {
+  font-family: 'Fira Code', monospace;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #FFD700;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+.comment {
+  color: #FFB600;
+}
+
+/* ---------- CHAT INTRO OVERLAY ---------- */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 1s ease;
+}
+
+.chat-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  max-width: 90%;
+}
+
+.chat-bubble {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 12px 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  font-size: 1.2rem;
+  background-image: linear-gradient(90deg, #FFD700 0%, #FFB600 25%, #FFF5B0 50%, #FFB600 75%, #FFD700 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+}
+
+.chat-bubble:nth-child(1) { animation-delay: 0.5s; }
+.chat-bubble:nth-child(2) { animation-delay: 2s; }
+.chat-bubble:nth-child(3) { animation-delay: 3.5s; }
+
+/* ---------- CONTENT TRANSITION ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- RESPONSIVE LAYOUT ---------- */
+@media (max-width: 992px) {
+  .content {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-right {
+    margin-top: 10px;
+  }
+  .logo {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .chat-bubble {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+  .poster {
+    max-width: 90%;
+  }
+  .register-btn, .reveal-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+  .nav-left a {
+    font-size: 0.9rem;
+  }
+}

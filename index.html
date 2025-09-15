@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>INFYRA'25 - National Level Tech Fest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="intro.css">
+    <style>
+        /* --- ADDED STYLES FOR CONSISTENT HEADER AND SIDEBAR --- */
+        :root {
+            --primary-orange: #ff6b35;
+            --primary-red: #dc2626;
+            --text-primary: #ffffff;
+            --text-secondary: #fca5a5;
+            --primary-cyan: #ff6b35;
+            --primary-pink: #dc2626;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            background: #0a0000;
+            color: var(--text-primary);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .main-menu {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .menu-item {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 400;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: width 0.3s ease;
+        }
+
+        .menu-item:hover::after,
+        .menu-item.active::after {
+            width: 100%;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            color: #ff6b35;
+        }
+
+        /* HAMBURGER ICON */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 25px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 3000;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px #ff6b35;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            transition: right 0.4s ease;
+            z-index: 2500;
+            padding: 2rem;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+            border-left: 2px solid rgba(255, 107, 53, 0.4);
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 1.5rem 0;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .sidebar ul li a:hover {
+            color: #ff6b35;
+        }
+        
+        /* --- 3D SLIDER STYLES --- */
+        .banner {
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner .slider {
+            position: relative;
+            bottom: 100px;
+            background: transparent;
+            width: 200px;
+            height: 320px;
+            transform-style: preserve-3d;
+            animation: autoRun 25s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes autoRun {
+            from {
+                transform: perspective(1200px) rotateX(-15deg) rotateY(0deg);
+            }
+            to {
+                transform: perspective(1200px) rotateX(-15deg) rotateY(360deg);
+            }
+        }
+
+        .banner .slider .item {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+                         translateZ(300px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .banner .slider .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 2rem;
+            }
+
+            .main-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .banner {
+                height: 80vh; 
+            }
+
+            .banner .slider {
+                width: 150px;
+                height: 240px; 
+            }
+
+            .banner .slider .item {
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cyber-bg">
+        <div class="cyber-gradient"></div>
+        <div class="matrix-rain" id="matrixRain"></div>
+        <div class="particles" id="particlesContainer"></div>
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <header class="header" id="header">
+        <a href="index.html" class="logo-container">
+            <span class="logo-text">INFYRA'25</span>
+        </a>
+
+        <nav class="main-menu" id="mainMenu">
+            <a href="index.html" class="menu-item active">Home</a>
+            <a href="event.html" class="menu-item">Events</a>
+            <a href="about.html" class="menu-item">About</a>
+            <a href="schedule.html" class="menu-item">Schedule</a>
+            <a href="team.html" class="menu-item">Team</a>
+            <a href="sponsors.html" class="menu-item">Sponsors</a>
+            <a href="contact.html" class="menu-item">Contact</a>
+        </nav>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="section active home-section" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">STEP INTO THE <span class="highlight">FUTURE</span></h1>
+            <h2 class="hero-subtitle">INFYRA'25 <span class="highlight">TECH FEST</span></h2>
+        </div>
+
+        <div class="glitch-text">INFYRA 2025</div>
+
+        <div class="coverflow-section">
+            <div class="coverflow-container">
+                <div class="coverflow" id="coverflow">
+
+                    <div class="coverflow-item" data-index="1">
+                        <div class="cover">
+                            <a href="./events/algorift/index.html">
+                                <img src="img/event1.png" alt="Cybersecurity" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="2">
+                        <div class="cover">
+                            <img src="img/event2.jpg" alt="Coding Challenge" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="3">
+                        <div class="cover">
+                            <img src="img/event3.jpg" alt="IoT Innovation" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="4">
+                        <div class="cover">
+                            <img src="img/event4.jpg" alt="Project Exhibition" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="5">
+                        <div class="cover">
+                            <img src="img/event5.jpg" alt="Tech Quiz" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="6">
+                        <div class="cover">
+                            <img src="img/event6.jpg" alt="INFYRA'24" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="6">
+                        <div class="cover">
+                            <img src="img/event7.jpg" alt="INFYRA'24" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="6">
+                        <div class="cover">
+                            <img src="img/event8.jpg" alt="INFYRA'24" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="dots-container" id="dots"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="countdown-section">
+        <video autoplay muted loop class="countdown-bg-video">
+            <source src="https://drive.google.com/uc?export=download&id=16ip6mGjhTuocj_5Fi9R0MXQ0LlS7h-vz"
+                type="video/mp4">
+        </video>
+        <div class="countdown-container">
+            <div class="countdown-tagline">🚀 The Future of Technology Awaits</div>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-circle" cx="60" cy="60" r="45" id="days-progress"></circle>
+                        </svg>
+                        <div class="countdown-number" id="days">000</div>
+                    </div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-circle" cx="60" cy="60" r="45" id="hours-progress"></circle>
+                        </svg>
+                        <div class="countdown-number" id="hours">00</div>
+                    </div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-circle" cx="60" cy="60" r="45" id="minutes-progress"></circle>
+                        </svg>
+                        <div class="countdown-number" id="minutes">00</div>
+                    </div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-circle" cx="60" cy="60" r="45" id="seconds-progress"></circle>
+                        </svg>
+                        <div class="countdown-number" id="seconds">00</div>
+                    </div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<div class="banner">
+        <div class="slider" style="--quantity: 8">
+            <div class="item" style="--position: 1"><img src="img/event1.png" alt=""></div>
+            <div class="item" style="--position: 2"><img src="img/event2.jpg" alt=""></div>
+            <div class="item" style="--position: 3"><img src="img/event3.jpg" alt=""></div>
+            <div class="item" style="--position: 4"><img src="img/event4.jpg" alt=""></div>
+            <div class="item" style="--position: 5"><img src="img/event5.jpg" alt=""></div>
+            <div class="item" style="--position: 6"><img src="img/event6.jpg" alt=""></div>
+            <div class="item" style="--position: 7"><img src="img/event7.jpg" alt=""></div>
+            <div class="item" style="--position: 8"><img src="img/event8.jpg" alt=""></div>
+        </div>
+    </div>
+    <div class="schedule-section">
+        <div class="page-header">
+            <h1 class="page-title">Event <span class="highlight">Schedule</span></h1>
+            <p class="page-subtitle">Your journey through innovation starts here</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="event-time">9:00 AM-11:00 AM</div>
+                    <h3 class="event-title">Inaugration</h3>
+                    <div class="event-speaker">INFYRA Team and Honourable Chief Guest</div>
+                    <p class="event-description">Welcome to INFYRA'25! Talk about infyra and share thoughts from Chief
+                        guests.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="event-time">11:15 AM-12:30 PM</div>
+                    <h3 class="event-title">Events</h3>
+                    <div class="event-speaker">Event Coordinators</div>
+                    <p class="event-description">Event will be conduct and all must be on time for an event</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="event-time">12:30 PM-1:30 PM</div>
+                    <h3 class="event-title">Lunch Break</h3>
+                    <p class="event-description">Networking lunch with fellow participants and speakers.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="event-time">2:00 PM-3:00 PM</div>
+                    <h3 class="event-title">Prize Distribution</h3>
+                    <p class="event-description">Prize distribution and closing remarks. Thank you for being part of
+                        INFYRA'25!</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="event-time">3:00 PM-3:30 PM</div>
+                    <h3 class="event-title">Wind up</h3>
+                    <p class="event-description">Chase to bus</p>
+                </div>
+            </div>
+
+
+        </div>
+        <section class="section sponsors-section" id="sponsors">
+            <div class="about-container">
+                <h2 class="section-title">Our Sponsors</h2>
+
+                <div class="sponsors-scroller">
+                    <div class="sponsors-track">
+                        <div class="sponsors-track">
+                            <div class="sponsor-logo">Gateway Software Solutions</div>
+                            <div class="sponsor-logo">Srinivasa Matric HR Sec School</div>
+                            <div class="sponsor-logo">Mohita Forwarders</div>
+                            <div class="sponsor-logo">Popappz Software Solutions</div>
+                            <div class="sponsor-logo">BM Creativisions</div>
+                            <div class="sponsor-logo">IEEE</div>
+                            <div class="sponsor-logo">Sairam Techno Incubation</div>
+                            <div class="sponsor-logo">Gateway Software Solutions</div>
+                            <div class="sponsor-logo">Srinivasa Matric HR Sec School</div>
+                            <div class="sponsor-logo">Mohita Forwarders</div>
+                            <div class="sponsor-logo">Popappz Software Solutions</div>
+                            <div class="sponsor-logo">BM Creativisions</div>
+                            <div class="sponsor-logo">IEEE</div>
+                            <div class="sponsor-logo">Sairam Techno Incubation</div>
+                        </div>
+
+                    </div>
+
+                    <div class="sponsors-scroller">
+                        <div class="sponsors-track">
+                            <div class="sponsor-logo">Gateway Software Solutions</div>
+                            <div class="sponsor-logo">Srinivasa Matric HR Sec School</div>
+                            <div class="sponsor-logo">Mohita Forwarders</div>
+                            <div class="sponsor-logo">Popappz Software Solutions</div>
+                            <div class="sponsor-logo">BM Creativisions</div>
+                            <div class="sponsor-logo">IEEE</div>
+                            <div class="sponsor-logo">Sairam Techno Incubation</div>
+                            <div class="sponsor-logo">Gateway Software Solutions</div>
+                            <div class="sponsor-logo">Srinivasa Matric HR Sec School</div>
+                            <div class="sponsor-logo">Mohita Forwarders</div>
+                            <div class="sponsor-logo">Popappz Software Solutions</div>
+                            <div class="sponsor-logo">BM Creativisions</div>
+                            <div class="sponsor-logo">IEEE</div>
+                            <div class="sponsor-logo">Sairam Techno Incubation</div>
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+        <div class="contact-hero">
+            <div class="contact-hero-content">
+                <h1 class="contact-title">Get In <span class="highlight">Touch</span></h1>
+                <p class="contact-subtitle">Ready to be part of INFYRA'25? Connect with us and join the tech revolution!
+                </p>
+            </div>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-grid">
+                <div class="contact-info-section">
+                    <h2>Contact Information</h2>
+
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>infyra@sairamit.edu.in</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 8248762631</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>Sairam College Rd, Sai Leo Nagar, West Tambaram, Chennai, Tamil Nadu 600044</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+                        </svg>
+                        <div class="contact-details">
+                            <h3>Event Date</h3>
+                            <p>September 25,2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h2>Send Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="organization">College/Organization</label>
+                            <input type="text" id="organization" name="organization">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message"
+                                placeholder="Tell us about your interest in INFYRA'25..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <div id="formStatus" style="margin-top: 1rem; color: #fca5a5;"></div>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div class="map-section">
+                <h2>Find Us</h2>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.323798909244!2d80.0506576!3d12.9606523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f51f638ddfbb%3A0xf3aef7ec7c8979ba!2sSri%20Sairam%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1693990000000"
+                        allowfullscreen loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="event.html">Events</a>
+                    <a href="team.html">Team</a>
+                </div>
+                <div class="copyright">
+                    © 2025 INFYRA'25 - National Level Tech Fest. All rights reserved.
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+       
+
+        <script src="intro.js"></script>
+</body>
+
+</html>

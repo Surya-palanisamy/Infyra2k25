@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infyra Sponsorship</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-gray-200 font-sans min-h-screen flex flex-col relative">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="imagess/bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Floating particles -->
+  <div id="particles"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar flex justify-between items-center px-8 py-4 fixed top-0 left-0 w-full z-50">
+    <!-- Logo -->
+    <div class="text-4xl font-extrabold karantina-font gradient-text">
+      INFYRA 2025
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="flex space-x-8 text-gray-200 font-semibold">
+      <li><a href="#about" class="hover:text-fuchsia-400 transition">About</a></li>
+      <li><a href="#sponsors" class="hover:text-fuchsia-400 transition">Sponsors</a></li>
+      <li><a href="#register" class="hover:text-fuchsia-400 transition">Register</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="about" class="backdrop text-center py-32 px-6 mt-24">
+    <h2 class="mt-4 text-xl md:text-2xl text-cyan-300 font-semibold">
+      Department of Information Technology
+    </h2>
+    <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-300">
+      Step into the future with <span class="text-fuchsia-400 font-bold">INFYRA</span> – the ultimate symposium of innovation and technology.
+    </p>
+  </section>
+
+ <section id="sponsors" class="py-24 px-6 md:px-16">
+  <h2 class="text-3xl md:text-4xl font-bold text-center text-fuchsia-400 mb-4">
+    Department of Information Technology
+  </h2>
+  <p class="text-center text-gray-300 mb-16 text-lg">
+    Meet our sponsors
+  </p>
+
+  <!-- Sponsor 1 -->
+  <div class="sponsor-row grid md:grid-cols-2 gap-10 items-center mb-20">
+    <!-- Info -->
+    <div class="sponsor-info glass-card hidden-card from-bottom p-6 rounded-2xl">
+      <h3 class="text-2xl font-bold text-purple-300">TechCorp</h3>
+      <p class="text-gray-300 mt-4">
+        Innovating the future of AI and automation with cutting-edge solutions.
+      </p>
+      <a href="https://techcorp.com" target="_blank" class="more-btn mt-6 inline-block">More Details</a>
+    </div>
+    <!-- Logo -->
+    <div class="sponsor-logo-box glass-card hidden-card from-bottom text-center p-6 rounded-2xl">
+      <img src="images/sponsor1.png" alt="TechCorp Logo" class="sponsor-img">
+    </div>
+  </div>
+
+  <!-- Sponsor 2 -->
+  <div class="sponsor-row grid md:grid-cols-2 gap-10 items-center mb-20">
+    <div class="sponsor-info glass-card hidden-card from-bottom p-6 rounded-2xl">
+      <h3 class="text-2xl font-bold text-pink-300">CodeWorks</h3>
+      <p class="text-gray-300 mt-4">
+        Leaders in cloud infrastructure and DevOps solutions worldwide.
+      </p>
+      <a href="https://codeworks.com" target="_blank" class="more-btn mt-6 inline-block">More Details</a>
+    </div>
+    <div class="sponsor-logo-box glass-card hidden-card from-bottom text-center p-6 rounded-2xl">
+      <img src="images/sponsor2.png" alt="CodeWorks Logo" class="sponsor-img">
+    </div>
+  </div>
+
+  <!-- Sponsor 3 -->
+  <div class="sponsor-row grid md:grid-cols-2 gap-10 items-center">
+    <div class="sponsor-info glass-card hidden-card from-bottom p-6 rounded-2xl">
+      <h3 class="text-2xl font-bold text-cyan-300">NextGen Labs</h3>
+      <p class="text-gray-300 mt-4">
+        Pioneers in biotech and sustainable technology for the next generation.
+      </p>
+      <a href="https://nextgenlabs.com" target="_blank" class="more-btn mt-6 inline-block">More Details</a>
+    </div>
+    <div class="sponsor-logo-box glass-card hidden-card from-bottom text-center p-6 rounded-2xl">
+      <img src="images/sponsor3.png" alt="NextGen Labs Logo" class="sponsor-img">
+    </div>
+  </div>
+</section>
+  <!-- Footer -->
+  <footer class="backdrop text-center py-10 text-gray-400 text-sm border-t border-purple-900/40">
+    © 2025 INFYRA – Department of Information Technology. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

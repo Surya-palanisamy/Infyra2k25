@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFYRA'25 – Events</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* RESET + VARIABLES */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-orange: #f2612c;
+        --primary-red: #dc2626;
+        --text-primary: #ffffff;
+        --text-secondary: #fca5a5;
+        --primary-cyan: #ff6b35;
+        --primary-pink: #dc2626;
+        --border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      body {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: #0a0000;
+        color: var(--text-primary);
+        overflow-x: hidden;
+      }
+
+      /* BACKGROUND EFFECTS */
+      .cyber-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -5;
+        overflow: hidden;
+      }
+
+      .cyber-gradient {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 107, 53, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(220, 38, 38, 0.15) 0%,
+            transparent 50%
+          );
+        animation: rotate 30s linear infinite;
+        filter: blur(40px);
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .matrix-rain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0.15;
+      }
+
+      .matrix-column {
+        position: absolute;
+        top: -100vh;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        color: var(--primary-cyan);
+        text-shadow: 0 0 5px var(--primary-cyan);
+        animation: matrixFall linear infinite;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+      }
+
+      @keyframes matrixFall {
+        0% {
+          transform: translateY(0);
+        }
+
+        100% {
+          transform: translateY(200vh);
+        }
+      }
+
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -3;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-cyan);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary-cyan);
+        animation: float 20s infinite;
+        opacity: 0;
+      }
+
+      .particle:nth-child(odd) {
+        background: var(--primary-pink);
+        box-shadow: 0 0 10px var(--primary-pink);
+        animation-duration: 25s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+
+        10% {
+          opacity: 1;
+        }
+
+        90% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(-100vh) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.5;
+        animation: orbFloat 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -4;
+      }
+
+      .orb1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary-cyan);
+        top: 10%;
+        left: -150px;
+        animation-delay: 0s;
+      }
+
+      .orb2 {
+        width: 400px;
+        height: 400px;
+        background: var(--primary-pink);
+        bottom: 10%;
+        right: -200px;
+        animation-delay: 5s;
+      }
+
+      .orb3 {
+        width: 250px;
+        height: 250px;
+        background: var(--primary-orange);
+        top: 50%;
+        left: 50%;
+        animation-delay: 10s;
+      }
+
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        33% {
+          transform: translate(100px, -50px) scale(1.1);
+        }
+
+        66% {
+          transform: translate(-50px, 100px) scale(0.9);
+        }
+      }
+
+      /* --- CORRECT HEADER AND SIDEBAR STYLES --- */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        z-index: 10000;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header.scrolled {
+        background: rgba(0, 0, 0, 0.95);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .header .logo-container {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: "Arial", sans-serif;
+      }
+
+      .main-menu {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .menu-item {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.8rem 0;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 400;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        font-size: 1.2rem;
+        font-family: "Arial", sans-serif;
+      }
+
+      .menu-item::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff6b35;
+        transition: width 0.3s ease;
+      }
+
+      .menu-item:hover::after,
+      .menu-item.active::after {
+        width: 100%;
+      }
+
+      .menu-item:hover,
+      .menu-item.active {
+        color: #ff6b35;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 3000;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 5px #ff6b35;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      .sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(15px);
+        transition: right 0.4s ease;
+        z-index: 2500;
+        padding: 2rem;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid rgba(255, 107, 53, 0.4);
+        padding-top: 6rem;
+      }
+
+      .sidebar.open {
+        right: 0;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 1.5rem 0;
+      }
+
+      .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        font-family: "Arial", sans-serif;
+      }
+
+      .sidebar ul li a:hover {
+        color: #ff6b35;
+      }
+
+      /* HERO */
+      .contact-hero {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 120px 2rem 50px;
+      }
+
+      .contact-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .contact-title .highlight {
+        background: linear-gradient(135deg, #ff6b35, #ffa500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .contact-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+      }
+
+      /* CARDS */
+      .contact-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+      }
+
+      .contact-form-section {
+        background: rgba(10, 0, 0, 0.7);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 2px solid rgba(255, 107, 53, 0.3);
+        margin-bottom: 3rem;
+      }
+
+      .contact-form-section h2 {
+        color: #ff6b35;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .event-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .event-card {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 2px solid rgba(255, 107, 53, 0.3);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .event-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        border-color: #ff6b35;
+      }
+
+      .event-card h3 {
+        color: #ff6b35;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .event-card p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #ff6b35, #ffa500);
+        color: #fff;
+        padding: 0.8rem 1.8rem;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+      }
+
+      .submit-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .header {
+          padding: 1rem 2rem;
+        }
+
+        .main-menu {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .contact-title {
+          font-size: 2.5rem;
+        }
+
+        .contact-form-section h2 {
+          font-size: 2rem;
+        }
+
+        .contact-form-section {
+          padding: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cyber-bg">
+      <div class="cyber-gradient"></div>
+      <div class="matrix-rain" id="matrixRain"></div>
+      <div class="particles" id="particlesContainer"></div>
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <header class="header" id="header">
+      <a href="index.html" class="logo-container">
+        <span class="logo-text">INFYRA'25</span>
+      </a>
+
+      <nav class="main-menu" id="mainMenu">
+        <a href="/" class="menu-item">Home</a>
+        <a href="event.html" class="menu-item active">Events</a>
+        <a href="about.html" class="menu-item">About</a>
+        <a href="schedule.html" class="menu-item">Schedule</a>
+        <a href="team.html" class="menu-item">Team</a>
+        <a href="sponsors.html" class="menu-item">Sponsors</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+      </nav>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <section class="contact-hero">
+      <div class="contact-hero-content">
+        <h1 class="contact-title">
+          INFYRA'25 <span class="highlight">Events</span>
+        </h1>
+        <p class="contact-subtitle">
+          Explore our Technical & Non-Technical events
+        </p>
+      </div>
+    </section>
+
+    <div class="contact-content">
+      <div class="contact-form-section">
+        <h2>Technical Events</h2>
+        <div class="event-cards">
+          <div class="event-card">
+            <h3>Concept Capsule</h3>
+            <p>“Crack the Capsule, Create the Future.”</p>
+            <a href="events/conceptcapsule/index.html" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>AlgoRift: The Code Trail Protocol</h3>
+            <p>“Crack the logic. Follow the trail. Unearth the final key.”</p>
+            <a href="events/algorift/index.html" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>Recursia: Polymorphic Recall</h3>
+            <p>“Recurse through logic, adapt and optimize memory.”</p>
+            <a href="events/recursia/index.html" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>RenderBlind</h3>
+            <p>"Design in the dark. Create with clarity.”</p>
+            <a href="events/renderblind/index.html" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>BotForge: The Conversational Arena</h3>
+            <p>“Code the mind. Create the voice.”</p>
+            <a href="events/botforage/index.html" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>Echelon Conflux: CTF Showdown</h3>
+            <p>“Crack the Code, Capture the Flag”</p>
+            <a href="events/echelon conflux/index.html" class="submit-btn">More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-form-section">
+        <h2>Non-Technical Events</h2>
+        <div class="event-cards">
+          <div class="event-card">
+            <h3>Plea to Gaia</h3>
+            <p>“Convince the Divine. Save Our Future.”</p>
+            <a href="#" class="submit-btn">More</a>
+          </div>
+          <div class="event-card">
+            <h3>Royal Rumble: Firefight Edition</h3>
+            <p>“Drop in. Gear up. Rule the battlefield.”</p>
+            <a href="#" class="submit-btn">More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- CORRECTED HAMBURGER MENU LOGIC ---
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        if (menuToggle && sidebar) {
+          menuToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+            menuToggle.classList.toggle("active");
+          });
+        }
+
+        // Close sidebar on outside click
+        document.addEventListener("click", (e) => {
+          if (
+            sidebar.classList.contains("open") &&
+            !sidebar.contains(e.target) &&
+            !menuToggle.contains(e.target)
+          ) {
+            sidebar.classList.remove("open");
+            menuToggle.classList.remove("active");
+          }
+        });
+
+        // Header scroll effect
+        window.addEventListener("scroll", () => {
+          const header = document.getElementById("header");
+          if (window.scrollY > 100) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        });
+
+        // --- Original Background Effects Script ---
+        function generateMatrixRain() {
+          const matrixRain = document.getElementById("matrixRain");
+          if (!matrixRain) return;
+          const characters =
+            "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+          const columns = Math.floor(window.innerWidth / 20);
+
+          for (let i = 0; i < columns; i++) {
+            const column = document.createElement("div");
+            column.className = "matrix-column";
+            column.style.left = i * 20 + "px";
+            column.style.animationDuration = Math.random() * 5 + 10 + "s";
+            column.style.animationDelay = Math.random() * 5 + "s";
+
+            let text = "";
+            const charCount = Math.floor(Math.random() * 20 + 10);
+            for (let j = 0; j < charCount; j++) {
+              text +=
+                characters[Math.floor(Math.random() * characters.length)] + " ";
+            }
+            column.textContent = text;
+            matrixRain.appendChild(column);
+          }
+        }
+
+        function generateParticles() {
+          const particlesContainer =
+            document.getElementById("particlesContainer");
+          if (!particlesContainer) return;
+          const particleCount = 50;
+
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+            particle.style.left = Math.random() * 100 + "%";
+            particle.style.animationDelay = Math.random() * 20 + "s";
+            particle.style.animationDuration = Math.random() * 10 + 20 + "s";
+            particlesContainer.appendChild(particle);
+          }
+        }
+
+        generateMatrixRain();
+        generateParticles();
+      });
+    </script>
+  </body>
+</html>

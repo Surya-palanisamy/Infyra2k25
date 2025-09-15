@@ -1,0 +1,179 @@
+:root{
+    --bg:rgba(7, 7, 7);
+    --neon-pink:#ff4fd8;
+    --mint-green:#3ef9b3;
+    --indigo:#3b0086;
+    --glass: rgba(255,255,255,0.04);
+    --muted: rgba(230,230,245,0.7);
+    --card-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  }
+  
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:#e9e9f5;font-family:Poppins,system-ui,Segoe UI,Arial;}
+  .container{width:min(1200px,94%);margin:0 auto}
+  /* Intro overlay */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #3ef9b3;
+    
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .intro-console {
+    width: 90%;
+    max-width: 720px;
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: pre;
+    overflow: hidden;
+  }
+  
+  /* Fade out animation */
+  .intro-overlay.fade-out {
+    animation: fadeOut 1s ease forwards;
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  /* Hidden state before reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  /* Active state */
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Header */
+  .site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(8,6,18,0.6), rgba(8,6,18,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.04)}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:42px;height:42px;border-radius:8px;background:conic-gradient(from 90deg,var(--indigo),var(--neon-pink),var(--mint-green));display:grid;place-items:center;font-weight:700}
+  .brand-text strong{font-size:1.05rem}
+  .muted{color:var(--muted);font-size:.95rem}
+  
+  .nav{display:flex;align-items:center;gap:12px}
+  .nav-list{display:flex;gap:18px;list-style:none;padding:0;margin:0}
+  .nav-list a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+  .nav-list a:hover{color:#fff;background:var(--glass)}
+  .cta{background:linear-gradient(90deg,var(--neon-pink),var(--mint-green));padding:8px 12px;color:#09090b;border-radius:10px;font-weight:700;text-decoration:none}
+  .hamburger{display:none;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 10px;border-radius:8px}
+  
+  /* Hero */
+  .hero{padding:48px 0}
+  .hero-grid{display:grid;grid-template-columns:1fr 420px 320px;gap:28px;align-items:center}
+  .hero-left{min-height:220px}
+  .terminal{padding:18px;background:rgba(0,0,0,0.35);border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+  .term-line{font-family:'Fira Code', monospace;background:transparent;color:var(--mint-green);font-weight:600;font-size:1.05rem}
+  .cursor{color:var(--neon-pink);margin-left:6px;display:inline-block;animation:blink 900ms steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  
+  .term-sub{margin-top:8px;color:var(--muted);font-size:.9rem}
+  .hero-cta{margin-top:12px;display:flex;gap:10px}
+  .btn{border:0;padding:10px 14px;border-radius:10px;cursor:pointer;background:linear-gradient(90deg,var(--neon-pink),var(--mint-green));color:#0b0b0f;font-weight:700;box-shadow:0 8px 32px rgba(62,249,179,0.06)}
+  .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+  
+  /* Poster card */
+  .hero-card{display:flex;align-items:center;justify-content:center}
+  .poster-card{width:100%;max-width:420px;padding:36px;border-radius:12px;background:linear-gradient(135deg, rgba(255,79,216,0.12), rgba(62,249,179,0.08));box-shadow:0 30px 80px rgba(11,8,22,0.6)}
+  .poster-title{margin:0;font-size:2rem;line-height:1.02}
+  .poster-title span{color:#fff}
+  .poster-desc{color:var(--muted);margin-top:10px}
+  
+  /* Aside */
+  .hero-right .card{padding:16px;border-radius:10px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.04)}
+  .quick-stats{display:flex;gap:10px;padding:0;margin:10px 0 0;list-style:none}
+  .quick-stats li{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:8px;color:var(--muted)}
+  
+  /* Sections */
+  .section{padding:20px 0}
+  .section.alt{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .card{padding:18px;border-radius:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.04)}
+  
+  /* Code block styling */
+  .code-block{background:#071018;color:#bfeee0;padding:5px;border-radius:5px;overflow:auto}
+  .code-block code{font-family:'Fira Code',monospace;font-size:.92rem;display:block}
+  
+  /* Format grid and register */
+  .format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .register-grid{display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start}
+  .form-card label{display:block;margin-bottom:10px}
+  .form-card input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+  .form-actions{display:flex;align-items:center;gap:12px;margin-top:8px}
+  .live-preview .console{height:160px;overflow:auto;background:#06060b;border-radius:8px;padding:12px;font-family:'Fira Code',monospace;color:var(--mint-green);font-size:.9rem}
+  
+  /* Rounds accordion */
+  .accordion .acc-item{margin-bottom:10px}
+  .acc-btn{width:100%;text-align:left;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;font-weight:700;cursor:pointer}
+  .acc-panel{display:none;padding:12px;margin-top:8px;background:#04040a;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+  
+  /* Modal console */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(8,6,18,0.85));z-index:120}
+  .modal-inner{width:min(920px,94%);background:#05050a;border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;box-shadow:0 40px 100px rgba(11,8,22,0.8)}
+  .modal-close{padding:12px;cursor:pointer;float:right;color:var(--muted)}
+  .modal-console{background:#03030a;padding:18px;height:360px;overflow:auto;font-family:'Fira Code',monospace;color:var(--mint-green)}
+  .modal-inner img {
+    display: block;
+    max-width: 100%;
+    max-height: 260px;
+    margin: 0 auto 12px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  .modal-console {
+    background:#03030a;
+    padding:18px;
+    height:360px;
+    overflow:auto;
+    font-family:'Fira Code', monospace;
+    color:var(--mint-green);
+    font-size:.9rem;
+    white-space: pre; /* ✅ preserves ASCII alignment */
+  }
+  .modal-console .c-line:last-child {
+    color: var(--neon-pink);
+    text-shadow: 0 0 6px var(--mint-green), 0 0 12px var(--neon-pink);
+  }
+  /* Footer */
+  .site-footer{padding:20px 0;border-top:1px solid rgba(255,255,255,0.03);margin-top:30px}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  
+  /* Floating snippets (bg) */
+  #code-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;font-family:'Fira Code',monospace}
+  .snip{position:absolute;white-space:pre;opacity:.12;font-size:14px;mix-blend-mode:screen;filter:blur(.2px);text-shadow:0 2px 20px rgba(0,0,0,0.6)}
+  
+  /* Keyframes to float up and drift */
+  @keyframes floatUp {
+    0% { transform: translate3d(0,40vh,0) rotate(-5deg); opacity:0 }
+    10% { opacity:1 }
+    100% { transform: translate3d(0,-30vh,0) rotate(20deg); opacity:0 }
+  }
+  
+  /* Responsive */
+  @media (max-width:1100px){
+    .hero-grid{grid-template-columns:1fr 360px}
+    .hero-right{display:none}
+    .register-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .nav-list{display:none}
+    .hamburger{display:inline-block}
+    .hero-grid{grid-template-columns:1fr}
+    .poster-card{max-width:100%}
+    .grid-3{grid-template-columns:1fr}
+    .format-grid{grid-template-columns:1fr}
+  }

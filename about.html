@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - INFYRA'25 - National Level Tech Fest</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-grey: #e5e7eb;
+        --primary-orange: #ff6b35;
+        --primary-red: #dc2626;
+        --secondary-amber: #fbbf24;
+        --dark-bg: #1a0000;
+        --darker-bg: #0a0000;
+        --card-bg: rgba(220, 38, 38, 0.1);
+        --border-color: rgba(255, 107, 53, 0.3);
+        --text-primary: #ffffff;
+        --text-secondary: #fca5a5;
+        --primary-cyan: #ff6b35;
+        --primary-pink: #dc2626;
+      }
+
+      body {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: var(--darker-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Enhanced Cyberpunk Background */
+      .cyber-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--darker-bg);
+        overflow: hidden;
+        z-index: -5;
+      }
+
+      .cyber-gradient {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 107, 53, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(220, 38, 38, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(251, 191, 36, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 60% 20%,
+            rgba(249, 115, 22, 0.15) 0%,
+            transparent 50%
+          );
+        animation: gradientRotate 30s linear infinite;
+        filter: blur(40px);
+      }
+
+      @keyframes gradientRotate {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+          transform: rotate(180deg) scale(1.2);
+        }
+
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
+      }
+
+      .matrix-rain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0.15;
+      }
+
+      .matrix-column {
+        position: absolute;
+        top: -100vh;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        color: var(--primary-cyan);
+        text-shadow: 0 0 5px var(--primary-cyan);
+        animation: matrixFall linear infinite;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+      }
+
+      @keyframes matrixFall {
+        0% {
+          transform: translateY(0);
+        }
+
+        100% {
+          transform: translateY(200vh);
+        }
+      }
+
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -3;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-cyan);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary-cyan);
+        animation: float 20s infinite;
+        opacity: 0;
+      }
+
+      .particle:nth-child(odd) {
+        background: var(--primary-pink);
+        box-shadow: 0 0 10px var(--primary-pink);
+        animation-duration: 25s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+
+        10% {
+          opacity: 1;
+        }
+
+        90% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(-100vh) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.5;
+        animation: orbFloat 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -4;
+      }
+
+      .orb1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary-cyan);
+        top: 10%;
+        left: -150px;
+        animation-delay: 0s;
+      }
+
+      .orb2 {
+        width: 400px;
+        height: 400px;
+        background: var(--primary-pink);
+        bottom: 10%;
+        right: -200px;
+        animation-delay: 5s;
+      }
+
+      .orb3 {
+        width: 250px;
+        height: 250px;
+        background: var(--primary-orange);
+        top: 50%;
+        left: 50%;
+        animation-delay: 10s;
+      }
+
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        33% {
+          transform: translate(100px, -50px) scale(1.1);
+        }
+
+        66% {
+          transform: translate(-50px, 100px) scale(0.9);
+        }
+      }
+
+      /* Header */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        z-index: 10000;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header.scrolled {
+        background: rgba(0, 0, 0, 0.95);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .header .logo-container {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: "Arial", sans-serif;
+      }
+
+      .main-menu {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .menu-item {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.8rem 0;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 400;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        font-size: 1.2rem;
+        font-family: "Arial", sans-serif;
+      }
+
+      .menu-item::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff6b35;
+        transition: width 0.3s ease;
+      }
+
+      .menu-item:hover::after,
+      .menu-item.active::after {
+        width: 100%;
+      }
+
+      .menu-item:hover,
+      .menu-item.active {
+        color: #ff6b35;
+      }
+
+      /* HAMBURGER ICON */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 3000;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 5px #ff6b35;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(15px);
+        transition: right 0.4s ease;
+        z-index: 2500;
+        padding: 2rem;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid rgba(255, 107, 53, 0.4);
+      }
+
+      .sidebar.open {
+        right: 0;
+      }
+
+      .close-icon {
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        text-align: right;
+        margin-bottom: 1.5rem;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 1.5rem 0;
+      }
+
+      .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        font-family: "Arial", sans-serif;
+      }
+
+      .sidebar ul li a:hover {
+        color: #ff6b35;
+      }
+
+      /* About Page Specific Styles */
+      .about-container {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        position: relative;
+        z-index: 100;
+      }
+
+      .about-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .about-title {
+        font-size: 4rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #ff6b35, #ffa500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+      }
+
+      .about-tagline {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        font-weight: 300;
+      }
+
+      .section-card {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        border: 2px solid var(--border-color);
+        border-radius: 20px;
+        padding: 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          rgba(255, 107, 53, 0.05),
+          rgba(220, 38, 38, 0.05)
+        );
+        border-radius: 18px;
+        z-index: -1;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-orange);
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .section-subtitle {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--primary-orange);
+        margin-bottom: 1.5rem;
+      }
+
+      .section-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+      }
+
+      .highlight-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .highlight-item {
+        background: rgba(255, 107, 53, 0.1);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .highlight-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      }
+
+      .highlight-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .highlight-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--primary-orange);
+        margin-bottom: 1rem;
+      }
+
+      .highlight-desc {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .stat-item {
+        text-align: center;
+        background: rgba(220, 38, 38, 0.1);
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--primary-orange);
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+      }
+
+      .achievements-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .achievement-item {
+        background: rgba(255, 107, 53, 0.05);
+        border-left: 4px solid var(--primary-orange);
+        padding: 1.5rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .achievement-item:hover {
+        background: rgba(255, 107, 53, 0.1);
+        transform: translateX(10px);
+      }
+
+      .marquee {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 1rem 0;
+        background: rgba(255, 107, 53, 0.05);
+        border-radius: 15px;
+      }
+
+      .marquee-content {
+        display: flex;
+        gap: 2rem;
+        animation: marquee-scroll 15s linear infinite;
+        width: max-content;
+      }
+
+      .marquee-content img {
+        height: 150px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .marquee-content img:hover {
+        transform: scale(1.05);
+      }
+
+      @keyframes marquee-scroll {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .footer {
+        background: rgba(0, 0, 0, 0.9);
+        border-top: 2px solid var(--border-color);
+        padding: 3rem 2rem 2rem;
+        text-align: center;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--primary-orange);
+      }
+
+      .copyright {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header {
+          padding: 1rem 2rem;
+        }
+
+        .main-menu {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .about-container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .about-title {
+          font-size: 2.5rem;
+        }
+
+        .section-card {
+          padding: 2rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .highlight-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="intro.css" />
+  </head>
+
+  <body>
+    <div class="cyber-bg">
+      <div class="cyber-gradient"></div>
+      <div class="matrix-rain" id="matrixRain"></div>
+      <div class="particles" id="particlesContainer"></div>
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <header class="header" id="header">
+      <a href="index.html" class="logo-container">
+        <span class="logo-text">INFYRA'25</span>
+      </a>
+
+      <nav class="main-menu" id="mainMenu">
+        <a href="/" class="menu-item">Home</a>
+        <a href="event.html" class="menu-item">Events</a>
+        <a href="about.html" class="menu-item active">About</a>
+        <a href="schedule.html" class="menu-item">Schedule</a>
+        <a href="team.html" class="menu-item">Team</a>
+        <a href="sponsors.html" class="menu-item">Sponsors</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+      </nav>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="about-container">
+      <div class="about-header">
+        <h1 class="about-title">ABOUT INFYRA'25</h1>
+        <p class="about-tagline">Innovate • Integrate • Inspire</p>
+        <p class="section-content">
+          Where Technology Meets Innovation - India's Premier National-Level
+          Technology Festival
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title">Our Mission & Vision</h2>
+        <div class="highlight-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🎯</div>
+            <h3 class="highlight-title">Mission</h3>
+            <p class="highlight-desc">
+              To foster collaboration among students, researchers, and industry
+              professionals through innovative competitions, hands-on workshops,
+              and inspiring lectures that bridge the gap between academic
+              learning and real-world applications.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🚀</div>
+            <h3 class="highlight-title">Vision</h3>
+            <p class="highlight-desc">
+              To establish INFYRA as India's premier technology festival,
+              driving innovation and creativity while nurturing the next
+              generation of tech leaders and entrepreneurs who will shape the
+              future of technology.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title">Department of Information Technology</h2>
+        <div class="section-content">
+          <p>
+            Established in 2008, the Department of Information Technology stands
+            as a beacon of excellence in technical education and research. With
+            a strong foundation built over more than a decade, our department
+            has consistently delivered outstanding results in academics,
+            research, and industry collaboration.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">180</div>
+            <div class="stat-label">Students</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">27</div>
+            <div class="stat-label">Faculty Members</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">₹20L</div>
+            <div class="stat-label">AICTE & DST Funding</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2008</div>
+            <div class="stat-label">Established</div>
+          </div>
+        </div>
+
+        <div class="section-content">
+          <p>
+            Our department excels in academic excellence, cutting-edge research
+            achievements, and comprehensive co-curricular activities. We have
+            received substantial funding of ₹20 lakhs from prestigious
+            organizations like AICTE and DST, enabling us to maintain
+            state-of-the-art laboratories and research facilities.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title">What Makes INFYRA'25 Special</h2>
+        <div class="highlight-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">💡</div>
+            <h3 class="highlight-title">Innovation Hub</h3>
+            <p class="highlight-desc">
+              A platform where cutting-edge ideas meet practical implementation,
+              fostering breakthrough innovations in technology.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌐</div>
+            <h3 class="highlight-title">Networking Excellence</h3>
+            <p class="highlight-desc">
+              Connect with industry leaders, researchers, and peers to build
+              lasting professional relationships and collaborations.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🛠️</div>
+            <h3 class="highlight-title">Skill Enhancement</h3>
+            <p class="highlight-desc">
+              Hands-on workshops and training sessions designed to enhance
+              technical skills and industry readiness.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🏅</div>
+            <h3 class="highlight-title">Recognition Platform</h3>
+            <p class="highlight-desc">
+              Showcase your talents and innovations on a national stage with
+              opportunities for recognition and awards.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🔮</div>
+            <h3 class="highlight-title">Future-Ready Learning</h3>
+            <p class="highlight-desc">
+              Exposure to emerging technologies and trends that shape the future
+              of the tech industry.
+            </p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">⭐</div>
+            <h3 class="highlight-title">Inspiring Excellence</h3>
+            <p class="highlight-desc">
+              Learn from industry experts and thought leaders who inspire
+              excellence and innovation in technology.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="section-card">
+        <h2 class="section-title">INFYRA'24 Highlights</h2>
+        <div class="marquee">
+          <div class="marquee-content">
+            <img src="assests/IMG_2797.JPG" alt="Highlight 1" />
+            <img src="assests/IMG_2801.JPG" alt="Highlight 2" />
+            <img src="assests/IMG_2805.JPG" alt="Highlight 3" />
+            <img src="assests/IMG_2829.JPG" alt="Highlight 4" />
+            <img src="assests/IMG_2831.JPG" alt="Highlight 5" />
+            <img
+              src="assests/Screenshot 2025-09-11 at 11.29.33 PM.png"
+              alt="Highlight 5"
+            />
+            <img
+              src="assests/Screenshot 2025-09-11 at 11.30.30 PM.png"
+              alt="Highlight 5"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="section-card">
+        <h2 class="section-title">INFYRA'25 By Numbers</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Expected Participants</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Industry Experts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Technical Events</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">₹5L+</div>
+            <div class="stat-label">Prize Money</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="copyright">
+          © 2025 INFYRA'25 - Department of Information Technology. All rights
+          reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Generate Matrix Rain Effect
+        function generateMatrixRain() {
+          const matrixRain = document.getElementById("matrixRain");
+          if (!matrixRain) return;
+          const characters =
+            "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+          const columns = Math.floor(window.innerWidth / 20);
+
+          matrixRain.innerHTML = ""; // Clear previous columns
+          for (let i = 0; i < columns; i++) {
+            const column = document.createElement("div");
+            column.className = "matrix-column";
+            column.style.left = `${i * 20}px`;
+            column.style.animationDuration = `${Math.random() * 5 + 10}s`;
+            column.style.animationDelay = `${Math.random() * 5}s`;
+
+            let text = "";
+            const charCount = Math.floor(Math.random() * 20 + 30);
+            for (let j = 0; j < charCount; j++) {
+              text +=
+                characters[Math.floor(Math.random() * characters.length)] + " ";
+            }
+            column.textContent = text;
+
+            matrixRain.appendChild(column);
+          }
+        }
+
+        // Generate Floating Particles
+        function generateParticles() {
+          const particlesContainer =
+            document.getElementById("particlesContainer");
+          if (!particlesContainer) return;
+          const particleCount = 50;
+
+          particlesContainer.innerHTML = ""; // Clear previous particles
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 20}s`;
+
+            particlesContainer.appendChild(particle);
+          }
+        }
+
+        // Header scroll effect
+        window.addEventListener("scroll", () => {
+          const header = document.getElementById("header");
+          if (window.scrollY > 100) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        });
+
+        // --- CORRECTED HAMBURGER MENU LOGIC ---
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        const closeSidebarBtn = document.getElementById("closeSidebar");
+
+        if (menuToggle && sidebar) {
+          menuToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+            menuToggle.classList.toggle("active");
+          });
+        }
+
+        if (closeSidebarBtn && sidebar) {
+          closeSidebarBtn.addEventListener("click", function () {
+            sidebar.classList.remove("open");
+            menuToggle.classList.remove("active");
+          });
+        }
+
+        // Close sidebar on outside click
+        document.addEventListener("click", (e) => {
+          if (
+            sidebar.classList.contains("open") &&
+            !sidebar.contains(e.target) &&
+            !menuToggle.contains(e.target)
+          ) {
+            sidebar.classList.remove("open");
+            menuToggle.classList.remove("active");
+          }
+        });
+
+        // Initialize effects
+        generateMatrixRain();
+        generateParticles();
+      });
+    </script>
+  </body>
+</html>

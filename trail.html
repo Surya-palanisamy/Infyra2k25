@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFYRA'25 - National Level Tech Fest</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="intro.css" />
+  </head>
+  <body>
+    <!-- Dynamic Cyberpunk Background -->
+    <div class="cyber-bg">
+      <div class="cyber-gradient"></div>
+      <div class="matrix-rain" id="matrixRain"></div>
+      <div class="particles" id="particlesContainer"></div>
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+      <a href="index.html" class="logo-container">
+        <span class="logo-text">INFYRA'25</span>
+      </a>
+
+      <nav class="main-menu" id="mainMenu">
+        <a href="index.html" class="menu-item active">Home</a>
+        <a href="event.html" class="menu-item">Events</a>
+        <a href="about.html" class="menu-item">About</a>
+        <a href="sched.html" class="menu-item">Schedule</a>
+        <a href="team.html" class="menu-item">Team</a>
+        <a href="sponsors.html" class="menu-item">Sponsors</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+      </nav>
+
+      <div class="menu-icon" onclick="openSidebar()">☰</div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="close-icon" onclick="closeSidebar()">×</div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html"> About</a></li>
+        <li><a href="sched.html"> Schedule</a></li>
+        <li><a href="team.html"> Team</a></li>
+        <li><a href="contact.html"> Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Home Section -->
+    <div class="section active home-section" id="home">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          STEP INTO THE <span class="highlight">FUTURE</span>
+        </h1>
+        <h2 class="hero-subtitle">
+          INFYRA'25 <span class="highlight">TECH FEST</span>
+        </h2>
+      </div>
+
+      <!-- Glitch Effect Title -->
+      <div class="glitch-text">INFYRA 2025</div>
+
+      <!-- Added particle canvas containers below the glitch text -->
+      <div
+        class="particles-container"
+        style="position: relative; width: 100%; height: 200px; margin: 2rem 0"
+      >
+        <canvas
+          id="infyraParticles"
+          style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            pointer-events: auto;
+          "
+        ></canvas>
+        <canvas
+          id="yearParticles"
+          style="
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            pointer-events: auto;
+          "
+        ></canvas>
+      </div>
+
+      <!-- Coverflow Section -->
+      <div class="coverflow-section">
+        <div class="coverflow-container">
+          <div class="coverflow" id="coverflow">
+            <div class="coverflow-item" data-index="1">
+              <div class="cover">
+                <img src="img/event1.png" alt="Cybersecurity" loading="lazy" />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="2">
+              <div class="cover">
+                <img
+                  src="img/event2.jpg"
+                  alt="Coding Challenge"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="3">
+              <div class="cover">
+                <img src="img/event3.jpg" alt="IoT Innovation" loading="lazy" />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="4">
+              <div class="cover">
+                <img
+                  src="img/event4.jpg"
+                  alt="Project Exhibition"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="5">
+              <div class="cover">
+                <img src="img/event5.jpg" alt="Tech Quiz" loading="lazy" />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="6">
+              <div class="cover">
+                <img src="img/event6.jpg" alt="INFYRA'24" loading="lazy" />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="7">
+              <div class="cover">
+                <img src="img/event7.jpg" alt="INFYRA'24" loading="lazy" />
+              </div>
+            </div>
+            <div class="coverflow-item" data-index="8">
+              <div class="cover">
+                <img src="img/event8.jpg" alt="INFYRA'24" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="dots-container" id="dots"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+      <video autoplay muted loop class="countdown-bg-video">
+        <source src="img/countdown bg.mp4" type="video/mp4" />
+      </video>
+      <div class="countdown-container">
+        <div class="countdown-tagline">🚀 The Future of Technology Awaits</div>
+        <div class="countdown-timer">
+          <div class="countdown-item">
+            <div class="circular-progress">
+              <svg>
+                <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                <circle
+                  class="progress-circle"
+                  cx="60"
+                  cy="60"
+                  r="45"
+                  id="days-progress"
+                ></circle>
+              </svg>
+              <div class="countdown-number" id="days">000</div>
+            </div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="circular-progress">
+              <svg>
+                <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                <circle
+                  class="progress-circle"
+                  cx="60"
+                  cy="60"
+                  r="45"
+                  id="hours-progress"
+                ></circle>
+              </svg>
+              <div class="countdown-number" id="hours">00</div>
+            </div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="circular-progress">
+              <svg>
+                <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                <circle
+                  class="progress-circle"
+                  cx="60"
+                  cy="60"
+                  r="45"
+                  id="minutes-progress"
+                ></circle>
+              </svg>
+              <div class="countdown-number" id="minutes">00</div>
+            </div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="circular-progress">
+              <svg>
+                <circle class="bg-circle" cx="60" cy="60" r="45"></circle>
+                <circle
+                  class="progress-circle"
+                  cx="60"
+                  cy="60"
+                  r="45"
+                  id="seconds-progress"
+                ></circle>
+              </svg>
+              <div class="countdown-number" id="seconds">00</div>
+            </div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <div class="container">
+        <div class="main-content">
+          <div class="left-content">
+            <div class="content-wrapper">
+              <h1 class="title">
+                INFYRA<br />
+                2025<br />
+                Tech Fest
+              </h1>
+              <div class="text-content">
+                <div class="text-section">
+                  <div class="divider"></div>
+                  <p>
+                    The Department of Information Technology, established in
+                    2008, has rapidly grown, now supporting 180 students and 27
+                    faculty members. Renowned for excellence in academics,
+                    research, and co-curricular activities, it boasts 64 Anna
+                    University ranks, multiple awards for discipline, and an
+                    impressive 90% placement rate.
+                  </p>
+                  <p>
+                    With a strong R&D cell, the department has secured ₹20 lakhs
+                    in funding from AICTE and DST, achieved 403 NPTEL
+                    certifications, several patents, and significant success in
+                    GATE. INFYRA'25, the department's national-level technical
+                    fest, is a dynamic platform designed to unite researchers,
+                    industry leaders, academicians, and students.
+                  </p>
+                  <p>
+                    Through competitions, workshops, and expert lectures,
+                    participants will showcase their talents, exchange
+                    knowledge, and learn from the best in Information
+                    Technology. Join us for a unique opportunity to sharpen
+                    technical skills, solve real-world problems, and explore
+                    cutting-edge advancements.
+                  </p>
+                  <div class="divider"></div>
+                </div>
+              </div>
+              <div class="logo-circle">
+                <span class="logo-text">IT</span>
+              </div>
+            </div>
+            <button class="register-btn">Register Now</button>
+          </div>
+
+          <div class="right-content">
+            <div class="frame-layout">
+              <div class="grid-container" id="grid-container">
+                <!-- Video frames will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <video class="video-bg" autoplay muted loop controls>
+    <source src="img/temp background.mp4">
+  </video>
+  -->
+    <div class="banner">
+      <!-- 3D Slider -->
+      <div class="slider" style="--quantity: 8">
+        <div class="item" style="--position: 1">
+          <img src="img/event1.png" alt="" />
+        </div>
+        <div class="item" style="--position: 2">
+          <img src="img/event2.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 3">
+          <img src="img/event3.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 4">
+          <img src="img/event4.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 5">
+          <img src="img/event5.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 6">
+          <img src="img/event6.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 7">
+          <img src="img/event7.jpg" alt="" />
+        </div>
+        <div class="item" style="--position: 8">
+          <img src="img/event8.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- Replaced hero section with schedule content -->
+    <div class="schedule-section">
+      <div class="page-header">
+        <h1 class="page-title">
+          Event <span class="highlight">Schedule</span>
+        </h1>
+        <p class="page-subtitle">Your journey through innovation starts here</p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="event-time">9:00 AM-11:00 AM</div>
+            <h3 class="event-title">Inauguration</h3>
+            <div class="event-speaker">
+              INFYRA Team and Honourable Chief Guest
+            </div>
+            <p class="event-description">
+              Welcome to INFYRA'25! Talk about infyra and share thoughts from
+              Chief guests.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="event-time">11:15 AM-12:30 PM</div>
+            <h3 class="event-title">Events</h3>
+            <div class="event-speaker">Event Coordinators</div>
+            <p class="event-description">
+              Event will be conduct and all must be on time for an event
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="event-time">12:30 PM-1:30 PM</div>
+            <h3 class="event-title">Lunch Break</h3>
+            <p class="event-description">
+              Networking lunch with fellow participants and speakers.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="event-time">2:00 PM-3:00 PM</div>
+            <h3 class="event-title">Prize Distribution</h3>
+            <p class="event-description">
+              Prize distribution and closing remarks. Thank you for being part
+              of INFYRA'25!
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="event-time">3:00 PM-3:30 PM</div>
+            <h3 class="event-title">Wide up</h3>
+            <p class="event-description">Chase to bus</p>
+          </div>
+        </div>
+      </div>
+          
+    </div>
+    <section class="section sponsors-section" id="sponsors">
+      <div class="about-container">
+        <h2 class="section-title">Our Sponsors</h2>
+
+        <!-- First Scroller -->
+        <div class="sponsors-scroller">
+          <div class="sponsors-track">
+            <div class="sponsor-logo">Google</div>
+            <div class="sponsor-logo">Microsoft</div>
+            <div class="sponsor-logo">Amazon</div>
+            <div class="sponsor-logo">Apple</div>
+            <div class="sponsor-logo">Meta</div>
+            <div class="sponsor-logo">Netflix</div>
+            <div class="sponsor-logo">Tesla</div>
+            <div class="sponsor-logo">Spotify</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="sponsor-logo">Google</div>
+            <div class="sponsor-logo">Microsoft</div>
+            <div class="sponsor-logo">Amazon</div>
+            <div class="sponsor-logo">Apple</div>
+            <div class="sponsor-logo">Meta</div>
+            <div class="sponsor-logo">Netflix</div>
+            <div class="sponsor-logo">Tesla</div>
+            <div class="sponsor-logo">Spotify</div>
+          </div>
+        </div>
+
+        <!-- Second Scroller -->
+        <div class="sponsors-scroller">
+          <div class="sponsors-track reverse">
+            <div class="sponsor-logo">IBM</div>
+            <div class="sponsor-logo">Oracle</div>
+            <div class="sponsor-logo">Adobe</div>
+            <div class="sponsor-logo">Salesforce</div>
+            <div class="sponsor-logo">Intel</div>
+            <div class="sponsor-logo">NVIDIA</div>
+            <div class="sponsor-logo">Cisco</div>
+            <div class="sponsor-logo">VMware</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="sponsor-logo">IBM</div>
+            <div class="sponsor-logo">Oracle</div>
+            <div class="sponsor-logo">Adobe</div>
+            <div class="sponsor-logo">Salesforce</div>
+            <div class="sponsor-logo">Intel</div>
+            <div class="sponsor-logo">NVIDIA</div>
+            <div class="sponsor-logo">Cisco</div>
+            <div class="sponsor-logo">VMware</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="contact-hero">
+      <div class="contact-hero-content">
+        <h1 class="contact-title">
+          Get In <span class="highlight">Touch</span>
+        </h1>
+        <p class="contact-subtitle">
+          Ready to be part of INFYRA'25? Connect with us and join the tech
+          revolution!
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="contact-content">
+      <div class="contact-grid">
+        <!-- Contact Information Section -->
+        <div class="contact-info-section">
+          <h2>Contact Information</h2>
+
+          <div class="contact-item">
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+              />
+            </svg>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <p>infyra@sairamit.edu.in</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+              />
+            </svg>
+            <div class="contact-details">
+              <h3>Phone</h3>
+              <p>+91 8248762631</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+              />
+            </svg>
+            <div class="contact-details">
+              <h3>Address</h3>
+              <p>
+                Sairam College Rd, Sai Leo Nagar, West Tambaram, Chennai, Tamil
+                Nadu 600044
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+              />
+            </svg>
+            <div class="contact-details">
+              <h3>Event Date</h3>
+              <p>September 25,2025</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="contact-form-section">
+          <h2>Send Message</h2>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="organization">College/Organization</label>
+              <input type="text" id="organization" name="organization" />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell us about your interest in INFYRA'25..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+            <div id="formStatus" style="margin-top: 1rem; color: #fca5a5"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Find Us Section -->
+      <div class="map-section">
+        <h2>Find Us</h2>
+        <div class="map-container">
+          <!-- <p>Interactive Campus Map - Department of Information Technology</p> -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.323798909244!2d80.0506576!3d12.9606523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f51f638ddfbb%3A0xf3aef7ec7c8979ba!2sSri%20Sairam%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1693990000000"
+            allowfullscreen
+            loading="lazy"
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="event.html">Events</a>
+          <a href="team.html">Team</a>
+        </div>
+        <div class="copyright">
+          © 2025 INFYRA'25 - National Level Tech Fest. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Added particle system JavaScript -->
+    <script>
+      class ParticleSystem {
+        constructor(canvasId, text, yOffset = 0) {
+          this.canvas = document.getElementById(canvasId);
+          this.ctx = this.canvas.getContext("2d");
+          this.text = text;
+          this.yOffset = yOffset;
+          this.particles = [];
+          this.mouse = { x: 0, y: 0 };
+          this.isMouseDown = false;
+
+          this.setupCanvas();
+          this.createParticles();
+          this.setupEventListeners();
+          this.animate();
+        }
+
+        setupCanvas() {
+          const rect = this.canvas.getBoundingClientRect();
+          this.canvas.width = rect.width * window.devicePixelRatio;
+          this.canvas.height = rect.height * window.devicePixelRatio;
+          this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+          this.canvas.style.width = rect.width + "px";
+          this.canvas.style.height = rect.height + "px";
+        }
+
+        createParticles() {
+          this.ctx.font = "bold 72px Arial";
+          this.ctx.fillStyle = "#ff6b35";
+          this.ctx.textAlign = "center";
+          this.ctx.fillText(
+            this.text,
+            this.canvas.width / (2 * window.devicePixelRatio),
+            80
+          );
+
+          const imageData = this.ctx.getImageData(
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+          );
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+          for (let y = 0; y < imageData.height; y += 3) {
+            for (let x = 0; x < imageData.width; x += 3) {
+              const index = (y * imageData.width + x) * 4;
+              const alpha = imageData.data[index + 3];
+
+              if (alpha > 128) {
+                this.particles.push({
+                  x: x / window.devicePixelRatio,
+                  y: y / window.devicePixelRatio,
+                  originalX: x / window.devicePixelRatio,
+                  originalY: y / window.devicePixelRatio,
+                  vx: 0,
+                  vy: 0,
+                  size: Math.random() * 2 + 1,
+                  color: "#ff6b35",
+                  scattered: false,
+                });
+              }
+            }
+          }
+        }
+
+        setupEventListeners() {
+          const updateMouse = (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            this.mouse.x = e.clientX - rect.left;
+            this.mouse.y = e.clientY - rect.top;
+          };
+
+          this.canvas.addEventListener("mousemove", updateMouse);
+          this.canvas.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            updateMouse(touch);
+          });
+
+          this.canvas.addEventListener(
+            "mouseenter",
+            () => (this.isMouseDown = true)
+          );
+          this.canvas.addEventListener(
+            "mouseleave",
+            () => (this.isMouseDown = false)
+          );
+          this.canvas.addEventListener(
+            "touchstart",
+            () => (this.isMouseDown = true)
+          );
+          this.canvas.addEventListener(
+            "touchend",
+            () => (this.isMouseDown = false)
+          );
+        }
+
+        animate() {
+          this.ctx.clearRect(
+            0,
+            0,
+            this.canvas.width / window.devicePixelRatio,
+            this.canvas.height / window.devicePixelRatio
+          );
+
+          this.particles.forEach((particle) => {
+            const dx = this.mouse.x - particle.x;
+            const dy = this.mouse.y - particle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (this.isMouseDown && distance < 100) {
+              if (!particle.scattered) {
+                particle.vx = (Math.random() - 0.5) * 10;
+                particle.vy = (Math.random() - 0.5) * 10;
+                particle.scattered = true;
+                particle.color = Math.random() > 0.5 ? "#ff8c42" : "#ff4500";
+              }
+            }
+
+            if (particle.scattered) {
+              particle.x += particle.vx;
+              particle.y += particle.vy;
+              particle.vx *= 0.98;
+              particle.vy *= 0.98;
+
+              if (Math.abs(particle.vx) < 0.1 && Math.abs(particle.vy) < 0.1) {
+                particle.scattered = false;
+                particle.color = "#ff6b35";
+              }
+            } else {
+              particle.x += (particle.originalX - particle.x) * 0.05;
+              particle.y += (particle.originalY - particle.y) * 0.05;
+            }
+
+            this.ctx.fillStyle = particle.color;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+          });
+
+          requestAnimationFrame(() => this.animate());
+        }
+      }
+
+      // Initialize particle systems when page loads
+      window.addEventListener("load", () => {
+        new ParticleSystem("infyraParticles", "INFYRA");
+        new ParticleSystem("yearParticles", "2025");
+      });
+    </script>
+
+    <script src="intro.js"></script>
+  </body>
+</html>

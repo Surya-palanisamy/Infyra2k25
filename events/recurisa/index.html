@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recursia — Polymorphic Recall</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="introOverlay" class="intro-overlay">
+        <div class="intro-console" id="introConsole"></div>
+      </div>
+  <!-- floating code snippet background -->
+  <div id="code-bg" aria-hidden="true"></div>
+
+  <!-- Header / Nav -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">⟲</div>
+        <div class="brand-text">
+          <strong>Recursia</strong>
+          <span class="muted">Polymorphic Recall</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="main-nav">☰</button>
+        <ul id="main-nav" class="nav-list">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../algorift/index.html">Previous</a></li>
+          <li><a href="../renderblind/index.html">Next</a></li>
+        </ul>
+      
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="terminal">
+            <div class="term-line prompt">$ <span id="typed-line"></span><span class="cursor">▌</span></div>
+            <div class="term-sub muted">Press <kbd>R</kbd> to reveal the poster</div>
+            <div class="hero-cta">
+              <a class="btn" href="#register">Register Team</a>
+              <button class="btn outline" id="openConsoleBtn">Reveal Poster</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="poster-card">
+            <h1 class="poster-title">Recursia:<br><span>Polymorphic Recall</span></h1>
+            <p class="poster-desc">Recurse through logic, adapt and optimize memory.</p>
+          </div>
+        </div>
+
+        <aside class="hero-right">
+          <div class="summary card">
+            <h3>Event Concept</h3>
+            <p class="muted">Multi-round coding competition testing memory, interpretation, debugging, and optimization across paradigms.</p>
+            <ul class="quick-stats">
+              <li><strong>2</strong> per team</li>
+         
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Concept -->
+    
+
+    <!-- Format -->
+    <section id="format" class="section alt">
+      <div class="container">
+        <h2>Format & Instructions</h2>
+        <div class="format-grid">
+          <div class="card">
+            <h4>Team</h4>
+            <p class="muted">Teams of 2.</p>
+          </div>
+          <div class="card">
+            <h4>Scoring</h4>
+            <p class="muted">Accuracy, time (tie-break), complexity/optimizations.</p>
+          </div>
+          <div class="card">
+            <h4>Tools</h4>
+            <p class="muted">Local editors allowed; internet per proctor rules.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rounds -->
+    <section id="rounds" class="section container">
+      <h2>Rounds</h2>
+      <div class="rounds">
+        <div class="accordion" data-acc>
+          <div class="acc-item">
+            <button class="acc-btn">Round 1 — Recall & Rebuild</button>
+            <div class="acc-panel">
+              <pre class="code-block"><code>// Shown snippet → reproduce with minimal diff</code></pre>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <button class="acc-btn">Round 2 — Recursive Debug</button>
+            <div class="acc-panel">
+              <pre class="code-block"><code>// Given buggy recursion → fix & optimize</code></pre>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <button class="acc-btn">Round 3 — Polymorphic Paradigms</button>
+            <div class="acc-panel">
+              <pre class="code-block"><code>// Solve in two representations (code + pseudocode)</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+  <!-- Poster console modal (typing reveal) -->
+  <div id="posterModal" class="modal" aria-hidden="true" role="dialog" aria-label="Poster reveal">
+    <div class="modal-inner">
+      <div class="modal-close" id="closeModal" aria-label="Close">✕</div>
+      <img src="images/face1.webp" style="display: inline;" alt="" srcset="">
+      <div class="modal-console" id="modalConsole" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Recursia</div>
+      <div class="muted">Built for recursion lovers</div>
+    </div>
+  </footer>
+
+  <script src="scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plea to Gaia — Convince the Divine. Save Our Future.</title>
+  <meta name="description" content="Plea to Gaia — immersive roleplay event with Guardians of the Galaxy theme." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Three.js CDN -->
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.155.0/examples/js/controls/OrbitControls.js"></script>
+
+  <style>
+    :root{
+      --bg: radial-gradient(circle at top, #000000 20%, #0a0a0a 100%);
+      --accent-red:#ff1f1f;
+      --accent-yellow:#f9e400;
+      --accent-white:#f0f0f0;
+      --glass: rgba(255,255,255,0.1);
+      --max-width:1100px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Karantina', 'Helvetica Neue', Arial;
+    }
+    body{background: var(--bg); color:var(--accent-white); margin:0; height:100%;}
+    *{box-sizing:border-box}
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+    header{position:fixed;top:12px;left:0;right:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:999}
+    .navcard{pointer-events:auto;background:var(--glass);backdrop-filter:blur(6px);border-radius:14px;padding:10px 18px;display:flex;gap:16px;align-items:center;box-shadow:0 6px 24px rgba(14,22,34,0.5);border:1px solid rgba(255,255,255,0.15)}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:44px;height:44px;border-radius:50%;background:conic-gradient(var(--accent-red),var(--accent-yellow),var(--accent-white));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .navlinks{display:flex;gap:12px;align-items:center}
+    .navlinks a{color:var(--accent-white);text-decoration:none;font-weight:600;padding:6px 10px;border-radius:8px;transition:background 0.3s}
+    .navlinks a.btn{background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow));color:#000}
+    .navlinks a:hover{background:rgba(255,255,255,0.15)}
+    main{padding-top:110px}
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:36px;align-items:center;padding:40px 0}
+    .hero-left{padding-right:8px}
+    h1{font-family:'Karantina',cursive;font-size:48px;margin:0;background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow),var(--accent-white));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .strap{font-size:18px;color:var(--accent-white);margin-top:10px}
+    .cta-row{margin-top:20px;display:flex;gap:12px}
+    .btn-primary{background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow));color:#000;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid var(--accent-white);padding:10px 16px;border-radius:10px;cursor:pointer;color:var(--accent-white)}
+    .chips{display:flex;gap:12px;margin-top:22px}
+    .chip{background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);min-width:120px;text-align:center;color:var(--accent-white)}
+    .chip strong{display:block;font-size:18px;background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow),var(--accent-white));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .chip small{color:var(--accent-white)}
+    .globe-wrap{height:520px;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.15)}
+    #globeCanvas{width:100%;height:100%;display:block}
+    section.card{background:var(--glass);margin-top:26px;padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.15);color:var(--accent-white)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card h3{margin:0 0 8px 0;background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow),var(--accent-white));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .rules li{margin-bottom:8px}
+    footer{margin:30px 0 80px;text-align:center;color:var(--accent-white)}
+    @media (max-width:980px){.hero{grid-template-columns:1fr;}.globe-wrap{height:360px}.grid-3{grid-template-columns:1fr}.navcard{flex-direction:column;gap:8px;}.container{padding:16px}}
+    .particle-field{position:absolute;inset:0;pointer-events:none}
+    .particle{position:absolute;width:6px;height:6px;border-radius:999px;background:linear-gradient(45deg,var(--accent-red),var(--accent-yellow),var(--accent-white));opacity:0.9;filter:blur(0.3px);animation:float 8s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-40px) scale(1.3)}100%{transform:translateY(0) scale(1)}}
+    .tilt{transform-style:preserve-3d;transition:transform 0.18s ease}.tilt:hover{transform:translateY(-6px) rotateX(3deg)}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navcard container">
+    <div class="logo">
+      <div class="mark">G</div>
+      <div>
+        <div style="font-weight:700">Plea to Gaia</div>
+        <div style="font-size:12px;color:var(--accent-white)">Guardians of the Galaxy Theme</div>
+      </div>
+    </div>
+    <nav class="navlinks" style="margin-left:auto">
+      <a href="../../index.html">Home</a>
+      <a href="../royalrumble/index.html">Next</a>
+      <a href="../echelon conflux/index.html">Previous</a>
+      <a href="https://forms.gle/YOUR_FORM_LINK_HERE" target="_blank" class="btn">Register</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Plea to Gaia</h1>
+      <div class="strap">Guardians of the Galaxy inspired immersive event — teams plead to the Earth Goddess for mercy.</div>
+      <div class="cta-row">
+        <a href="https://forms.gle/YOUR_FORM_LINK_HERE" target="_blank" class="btn-primary">Register Team</a>
+        <a href="#format" class="btn-ghost">See Format</a>
+      </div>
+      <div class="chips">
+        <div class="chip tilt"><small>Team size</small><strong>3–5</strong></div>
+        <div class="chip tilt"><small>Preparation</small><strong>10 mins</strong></div>
+        <div class="chip tilt"><small>Theme</small><strong>Environment</strong></div>
+      </div>
+
+      <section class="card" id="about">
+        <h3>Event Concept</h3>
+        <p>Each team selects one member to be Gaia (Earth Goddess). Others plead for salvation from an environmental disaster, crafting socially-aware pleas to convince Gaia to save them and the planet.</p>
+      </section>
+
+      <section class="card" id="format">
+        <h3>Format & Instructions</h3>
+        <div class="grid-3">
+          <div class="tilt" style="padding:12px">
+            <h4>Preparation</h4>
+            <p>10 minutes to prepare a 3–5 minute plea. Gaia evaluates critically.</p>
+          </div>
+          <div class="tilt" style="padding:12px">
+            <h4>Team Formation</h4>
+            <p>Teams of 3–5. One member plays Gaia, others plead as humans.</p>
+          </div>
+          <div class="tilt" style="padding:12px">
+            <h4>Judging</h4>
+            <p>Creativity, social awareness, emotional impact and teamwork.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="rules">
+        <h3>Rules</h3>
+        <ol class="rules">
+          <li>3–5 minutes per plea, 10 minutes prep.</li>
+          <li>Original content only.</li>
+          <li>Respectful language.</li>
+          <li>Gaia's decision is final.</li>
+          <li>Teams must register before the event.</li>
+        </ol>
+      </section>
+    </div>
+
+    <div>
+      <div class="globe-wrap tilt">
+        <canvas id="globeCanvas"></canvas>
+        <div class="particle-field"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>© Plea to Gaia — Guardians of the Galaxy Theme. Using Red, Yellow and White gradients on a black background.</footer>
+</main>
+
+<script>
+(function spawnParticles(){
+  const field = document.querySelector('.particle-field');
+  if(!field) return;
+  const count = 28;
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className='particle';
+    const size = 4 + Math.random()*6;
+    p.style.width = size+'px'; p.style.height = size+'px';
+    p.style.left = (Math.random()*100)+'%';
+    p.style.top = (Math.random()*100)+'%';
+    p.style.opacity = 0.35 + Math.random()*0.7;
+    p.style.animationDelay = (Math.random()*6)+'s';
+    field.appendChild(p);
+  }
+})();
+
+(function initGlobe(){
+  const canvas = document.getElementById('globeCanvas');
+  if(!canvas) return;
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+  camera.position.set(0,0,3.4);
+  const ambient = new THREE.AmbientLight(0xffffff,0.9);
+  scene.add(ambient);
+
+  const geometry = new THREE.SphereGeometry(1,64,64);
+  const textureLoader = new THREE.TextureLoader();
+  const material = new THREE.MeshStandardMaterial({
+    map: textureLoader.load('https://threejs.org/examples/textures/earth_atmos_2048.jpg')
+  });
+  const globe = new THREE.Mesh(geometry,material);
+  scene.add(globe);
+
+  const controls = new THREE.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping = true;
+  controls.enablePan = false;
+  controls.minDistance = 2.2;
+  controls.maxDistance = 5;
+
+  function animate(){
+    requestAnimationFrame(animate);
+    globe.rotation.y += 0.001;
+    controls.update();
+    renderer.render(scene,camera);
+  }
+  animate();
+})();
+</script>
+
+</body>
+</html>

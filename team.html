@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team - INFYRA'25 National Level Tech Fest</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-orange: #ff6b35;
+        --primary-red: #dc2626;
+        --darker-bg: #0a0000;
+        --text-primary: #ffffff;
+        --text-secondary: #fca5a5;
+        --primary-cyan: #ff6b35;
+        --primary-pink: #dc2626;
+      }
+
+      body {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: var(--darker-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- BACKGROUND STYLES --- */
+      .cyber-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--darker-bg);
+        overflow: hidden;
+        z-index: -5;
+      }
+
+      .cyber-gradient {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 107, 53, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(220, 38, 38, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(251, 191, 36, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 60% 20%,
+            rgba(249, 115, 22, 0.15) 0%,
+            transparent 50%
+          );
+        animation: gradientRotate 30s linear infinite;
+        filter: blur(40px);
+      }
+
+      @keyframes gradientRotate {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.2);
+        }
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
+      }
+
+      .matrix-rain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0.15;
+      }
+
+      .matrix-column {
+        position: absolute;
+        top: -100vh;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        color: var(--primary-cyan);
+        text-shadow: 0 0 5px var(--primary-cyan);
+        animation: matrixFall linear infinite;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+      }
+
+      @keyframes matrixFall {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(200vh);
+        }
+      }
+
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -3;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-cyan);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary-cyan);
+        animation: float 20s infinite;
+        opacity: 0;
+      }
+
+      .particle:nth-child(odd) {
+        background: var(--primary-pink);
+        box-shadow: 0 0 10px var(--primary-pink);
+        animation-duration: 25s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.5;
+        animation: orbFloat 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -4;
+      }
+      .orb1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary-cyan);
+        top: 10%;
+        left: -150px;
+      }
+      .orb2 {
+        width: 400px;
+        height: 400px;
+        background: var(--primary-pink);
+        bottom: 10%;
+        right: -200px;
+        animation-delay: 5s;
+      }
+      .orb3 {
+        width: 250px;
+        height: 250px;
+        background: var(--primary-orange);
+        top: 50%;
+        left: 50%;
+        animation-delay: 10s;
+      }
+
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(100px, -50px) scale(1.1);
+        }
+        66% {
+          transform: translate(-50px, 100px) scale(0.9);
+        }
+      }
+
+      /* --- CORRECT HEADER AND SIDEBAR STYLES --- */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        z-index: 10000;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header.scrolled {
+        background: rgba(0, 0, 0, 0.95);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .header .logo-container {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: "Arial", sans-serif;
+      }
+
+      .main-menu {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .menu-item {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.8rem 0;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 400;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        font-size: 1.2rem;
+        font-family: "Arial", sans-serif;
+      }
+
+      .menu-item::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff6b35;
+        transition: width 0.3s ease;
+      }
+
+      .menu-item:hover::after,
+      .menu-item.active::after {
+        width: 100%;
+      }
+
+      .menu-item:hover,
+      .menu-item.active {
+        color: #ff6b35;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 3000;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 5px #ff6b35;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      .sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(15px);
+        transition: right 0.4s ease;
+        z-index: 2500;
+        padding: 2rem;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid rgba(255, 107, 53, 0.4);
+      }
+
+      .sidebar.open {
+        right: 0;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 1.5rem 0;
+      }
+
+      .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        font-family: "Arial", sans-serif;
+      }
+
+      .sidebar ul li a:hover {
+        color: #ff6b35;
+      }
+
+      /* --- MAIN CONTENT AND PAGE-SPECIFIC STYLES --- */
+      .section {
+        padding: 120px 2rem 50px;
+        position: relative;
+        z-index: 100;
+      }
+
+      .team-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .team-title {
+        font-size: 4rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        font-family: "Arial", sans-serif;
+      }
+
+      .team-title .highlight {
+        background: linear-gradient(135deg, #ff6b35, #ffa500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .team-subtitle {
+        font-size: 1.2rem;
+        color: #fca5a5;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+      }
+
+      .team-card {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(255, 107, 53, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .team-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-orange);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+      }
+
+      .team-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .team-role {
+        font-size: 1.1rem;
+        color: #ff6b35;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .team-description {
+        color: #fca5a5;
+        line-height: 1.6;
+      }
+
+      .organizing-committee {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .committee-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .committee-title .highlight {
+        background: linear-gradient(135deg, #ff6b35, #ffa500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .committee-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .committee-card {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .committee-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-orange);
+        box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+      }
+
+      .committee-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .committee-role {
+        color: #ff6b35;
+        font-size: 0.95rem;
+      }
+
+      .footer {
+        background: rgba(0, 0, 0, 0.9);
+        border-top: 1px solid rgba(255, 107, 53, 0.2);
+        padding: 2rem;
+        text-align: center;
+        margin-top: 4rem;
+        position: relative;
+        z-index: 100;
+      }
+
+      .footer-text {
+        color: #fca5a5;
+        margin-bottom: 1rem;
+      }
+
+      .footer-nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-nav a {
+        color: #ff6b35;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-nav a:hover {
+        color: #ffffff;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header {
+          padding: 1rem 2rem;
+        }
+        .main-menu {
+          display: none;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+        .team-title {
+          font-size: 2.5rem;
+        }
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .committee-title {
+          font-size: 2rem;
+        }
+        .committee-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-nav {
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cyber-bg">
+      <div class="cyber-gradient"></div>
+      <div class="matrix-rain" id="matrixRain"></div>
+      <div class="particles" id="particlesContainer"></div>
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <header class="header" id="header">
+      <a href="index.html" class="logo-container">
+        <span class="logo-text">INFYRA'25</span>
+      </a>
+
+      <nav class="main-menu" id="mainMenu">
+        <a href="/" class="menu-item">Home</a>
+        <a href="event.html" class="menu-item">Events</a>
+        <a href="about.html" class="menu-item">About</a>
+        <a href="schedule.html" class="menu-item">Schedule</a>
+        <a href="team.html" class="menu-item active">Team</a>
+        <a href="sponsors.html" class="menu-item">Sponsors</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+      </nav>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="section team-section" id="team">
+      <div class="team-header">
+        <h1 class="team-title">Meet Our <span class="highlight">Team</span></h1>
+        <p class="team-subtitle">
+          The brilliant minds behind INFYRA'25 National Level Tech Fest
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <h3 class="team-name">Dr. V. Brindha Devi</h3>
+          <p class="team-role">Head of the Department</p>
+          <p class="team-description">Department of Information Technology</p>
+        </div>
+        <div class="team-card">
+          <h3 class="team-name">Ms. Josephine Ruth Fenitha</h3>
+          <p class="team-role">Faculty Coordinator</p>
+          <p class="team-description">Department of Information Technology</p>
+        </div>
+        <div class="team-card">
+          <h3 class="team-name">Dr. R. Prabavathi</h3>
+          <p class="team-role">Faculty Coordinator</p>
+          <p class="team-description">Department of Information Technology</p>
+        </div>
+      </div>
+
+      <div class="organizing-committee">
+        <h2 class="committee-title">
+          Core <span class="highlight">Organizing Committee</span>
+        </h2>
+        <div class="committee-grid">
+          <div class="committee-card">
+            <h4 class="committee-name">Anto Aswin Hertz</h4>
+            <p class="committee-role">President</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Abinaya</h4>
+            <p class="committee-role">President</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Balamurugan</h4>
+            <p class="committee-role">Vice President</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Harini</h4>
+            <p class="committee-role">Vice President</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Sangeethkumar</h4>
+            <p class="committee-role">Secretary</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Shanthosh Kumar</h4>
+            <p class="committee-role">Secretary</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Gopikaa</h4>
+            <p class="committee-role">Vice Secretary</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Sri Dhanush</h4>
+            <p class="committee-role">Vice Secretary</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Helena Christy</h4>
+            <p class="committee-role">Treasurer</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Archana</h4>
+            <p class="committee-role">Treasurer</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Thangaraj</h4>
+            <p class="committee-role">Vice Treasurer</p>
+          </div>
+          <div class="committee-card">
+            <h4 class="committee-name">Roopadharshini</h4>
+            <p class="committee-role">Vice Treasurer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-text">
+        © 2025 INFYRA'25 - National Level Tech Fest. All rights reserved.
+      </p>
+      <nav class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="event.html">Events</a>
+        <a href="team.html">Team</a>
+      </nav>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function generateMatrixRain() {
+          const matrixRain = document.getElementById("matrixRain");
+          if (!matrixRain) return;
+          const characters =
+            "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+          const columns = Math.floor(window.innerWidth / 20);
+
+          matrixRain.innerHTML = "";
+          for (let i = 0; i < columns; i++) {
+            const column = document.createElement("div");
+            column.className = "matrix-column";
+            column.style.left = `${i * 20}px`;
+            column.style.animationDuration = `${Math.random() * 5 + 10}s`;
+            column.style.animationDelay = `${Math.random() * 5}s`;
+            let text = "";
+            const charCount = Math.floor(Math.random() * 20 + 30);
+            for (let j = 0; j < charCount; j++) {
+              text +=
+                characters[Math.floor(Math.random() * characters.length)] + " ";
+            }
+            column.textContent = text;
+            matrixRain.appendChild(column);
+          }
+        }
+
+        function generateParticles() {
+          const particlesContainer =
+            document.getElementById("particlesContainer");
+          if (!particlesContainer) return;
+          const particleCount = 50;
+
+          particlesContainer.innerHTML = "";
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 20}s`;
+            particlesContainer.appendChild(particle);
+          }
+        }
+
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        if (menuToggle && sidebar) {
+          menuToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+            menuToggle.classList.toggle("active");
+          });
+        }
+
+        document.addEventListener("click", (e) => {
+          if (
+            sidebar.classList.contains("open") &&
+            !sidebar.contains(e.target) &&
+            !menuToggle.contains(e.target)
+          ) {
+            sidebar.classList.remove("open");
+            menuToggle.classList.remove("active");
+          }
+        });
+
+        generateMatrixRain();
+        generateParticles();
+      });
+    </script>
+  </body>
+</html>
+in this also implement same handburgur and header

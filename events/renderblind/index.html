@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INFYRA — RenderBlind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">INFYRA</div>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../recurisa/index.html">Previous</a></li>
+      <li><a href="../botforage/index.html">Next</a></li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdxbTuvcRBLIDtIuNynqaqBUpdIayfVh0dERJiPpc42uP9o7Q/viewform?usp=dialog" target="_blank" class="btn">Register</a></li>
+    </ul>
+  </div>
+</nav>
+  <!-- Intro Overlay -->
+<!-- Intro Wireframe Morph -->
+<div id="intro-wireframe">
+  <div class="wireframe-text">
+    <span class="wf-letter">R</span>
+    <span class="wf-letter">E</span>
+    <span class="wf-letter">N</span>
+    <span class="wf-letter">D</span>
+    <span class="wf-letter">E</span>
+    <span class="wf-letter">R</span>
+    &nbsp;
+    <span class="wf-letter">B</span>
+    <span class="wf-letter">L</span>
+    <span class="wf-letter">I</span>
+    <span class="wf-letter">N</span>
+    <span class="wf-letter">D</span>
+  </div>
+  <h1 class="final-title">RENDER BLIND</h1>
+</div>
+
+  <!-- Intro Overlay --
+  <div id="intro">
+    <div class="intro-cube">
+      <div class="face front">INFYRA</div>
+      <div class="face back">2025</div>
+      <div class="face right">KIT</div>
+      <div class="face left">AI</div>
+      <div class="face top">CODE</div>
+      <div class="face bottom">TECH</div>
+    </div>
+  </div>-->
+
+  
+  <section class="hero">
+    <div class="wrap hero-content">
+      <!-- Glitchy hologram text -->
+      <div class="brand">
+        <h1 class="title glitch" aria-label="INFYRA">RENDER BLIND</h1>
+      </div>
+    <section class="event-section">
+      <article class="about-event">
+        <div class="about-wrap">
+          <h2>Event Concept</h2>
+          <p>
+            <strong>RenderBlind</strong> is a two-round design challenge that tests both creativity and execution under 
+unique constraints. 
+<br>
+<br>
+<b>Round 1 (Online):</b> Participants will design based on a single given theme. From this, 7 teams will 
+be shortlisted.<br>
+<b>Round 2 (Offline):</b> The shortlisted teams will compete in the final round, which includes an 
+additional challenge conducted offline.
+          </p>
+    
+          <h3>Format & Instructions</h3>
+          <ul>
+            <li><strong>Team Formation</strong>: Teams of 2 participants only.</li>
+            <li>Teams must bring their own laptops.</li>
+            <li>Strictly no AI tools or external help.</li>
+            <li>Only Figma/Canva allowed.</li>
+          </ul>
+        </div>
+      </article>
+     
+    <!-- Right aligned hologram -->
+      <div class="holo-wrapper">
+        <div class="container" style="--hue: 220">
+          <!-- Single Event Popup Hologram -->
+          <div class="event-popup-single">
+            <img src="images/poster.jpg" alt="Main Event">
+            <span>UI/UX Showdown</span>
+          </div>
+        
+          <!-- Rings -->
+          <div class="ring r01"></div>
+          <div class="ring r02"></div>
+          <div class="ring r03"></div>
+          <div class="ring r04"></div>
+          <div class="ring r051"></div>
+          <div class="ring r052"></div>
+          <div class="ring r06"></div>
+          <div class="ring r07"></div>
+          <div class="ring r08"></div>
+          <div class="ring r09"></div>
+        </div>
+        
+        <div class="card" aria-live="polite">
+          
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdxbTuvcRBLIDtIuNynqaqBUpdIayfVh0dERJiPpc42uP9o7Q/viewform?usp=dialog" target="_blank">Register Now</a>
+        </div>
+
+    <!-- Neon Grid Floor -->
+    <div class="grid-floor"></div>
+  </section>
+
+  <footer>
+    <div>© 2025 INFYRA</div>
+    <div class="links">
+      <a href="#">Event Guide</a>
+      <a href="#">Schedule</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("mousemove", e => {
+      const particles = document.querySelectorAll(".particles span");
+      let x = (e.clientX / window.innerWidth - 0.5) * 40; // stronger effect
+      let y = (e.clientY / window.innerHeight - 0.5) * 40;
+  
+      particles.forEach((p, i) => {
+        let depth = (i % 6) + 1; // different depths
+        p.style.marginLeft = `${x / depth}px`;
+        p.style.marginTop = `${y / depth}px`
+      });
+    });
+    
+  </script>
+</body>
+</html>
