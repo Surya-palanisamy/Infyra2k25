@@ -354,6 +354,7 @@ body {
   transition: transform .2s ease, filter .2s ease;
   text-transform: uppercase;
   letter-spacing: .06em;
+  text-decoration: none;
 }
 .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
 .btn:active { transform: translateY(0) scale(.98); }
