@@ -2260,6 +2260,7 @@ body {
   margin: 30px auto 60px;
   display: block;
   align-items: center;
+  margin-bottom:160px;
 
   /* Outline effect */
   filter: drop-shadow(0 0 3px #ff6b35)   /* orange glow */
