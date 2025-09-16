@@ -8,15 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="/events/fibicon2.png" sizes="512x512" >
   <style>
     :root { --overlay: rgba(0,0,0,.45); }
     * { box-sizing: border-box; scroll-behavior: smooth; }
     html, body { height: 100%; margin: 0; }
     body { color: #fff; font: 20px/1.6 'Karantina', cursive; background: #000; }
 
-    .wrapper { position: relative; height: 100svh; min-height: 420px; overflow: hidden; }
-    .video-bg { position: absolute; inset: 0; }
+    .wrapper { position: relative; min-height: 100vh; overflow-x: hidden; }
+    .video-bg { position: fixed; inset: 0; z-index: -1; }
     .video-bg video {
       position: absolute; top: 50%; left: 50%;
       min-width: 100%; min-height: 100%;
@@ -25,31 +24,27 @@
       object-fit: cover;
       filter: brightness(0.9) contrast(1.05);
     }
-    .overlay { position: absolute; inset: 0; background: var(--overlay); }
+    .overlay { position: fixed; inset: 0; background: var(--overlay); z-index: -1; }
 
     /* Back Button */
     .back-btn {
       position: fixed;
       top: 20px;
       left: 20px;
-      padding: 10px 22px;
-      font-size: 1.3rem;
+      padding: 8px 18px;
+      font-size: 1.1rem;
       font-weight: bold;
       color: #fff;
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.3);
       border-radius: 10px;
       text-decoration: none;
-      z-index: 5;
+      z-index: 10;
       cursor: pointer;
       backdrop-filter: blur(6px);
       transition: 0.3s ease;
     }
-    .back-btn a{
-       text-decoration: none;
-      color:white;
-    }
-      
+    .back-btn a { color: #fff; text-decoration: none; }
     .back-btn:hover {
       background: rgba(255,255,255,0.2);
       transform: scale(1.05);
@@ -57,25 +52,29 @@
 
     /* Top Center Heading */
     .top-heading {
-      position: fixed;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 5rem;
+      text-align: center;
+      font-size: 4rem;
       font-weight: bold;
       color: #fff;
       font-family: 'Karantina', cursive;
       text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 25px rgba(255,255,255,0.7);
-      z-index: 4;
-      text-align: center;
+      margin: 80px 0 30px 0;
+      padding: 0 20px;
+    }
+
+    /* Main Content Container */
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
     }
 
     /* Left side description */
     .left-description {
-      position: absolute;
-      top: 150px;
-      left: 40px;
-      max-width: 900px;
+      flex: 1;
       font-size: 1.5rem;
       line-height: 1.8;
       color: #fff;
@@ -87,11 +86,22 @@
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 4px 30px rgba(0,0,0,0.3);
       border: 1px solid rgba(255,255,255,0.2);
-      z-index: 4;
-      overflow-y: auto;
-      max-height: 70vh;
     }
-  
+
+    /* Right side poster */
+    .right-poster {
+      flex: 0 0 380px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 45px rgba(0,0,0,0.6);
+    }
+    .right-poster img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
     /* Tagline */
     .tagline {
       font-size: 1.8rem;
@@ -123,7 +133,8 @@
       border-radius: 14px;
       box-shadow: 0 3px 18px rgba(0,0,0,0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-size: 1.7rem;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
     }
     .info-block:hover {
       transform: translateY(-6px);
@@ -132,12 +143,12 @@
 
     .info-block h2 {
       color: #ff4b2b;
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-bottom: 12px;
       text-decoration: underline;
     }
     .info-block h3 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin: 12px 0 8px;
       color: #ffd700;
     }
@@ -147,14 +158,14 @@
     }
     .info-block ul li {
       margin-bottom: 8px;
-      font-size: 1.9rem;
+      font-size: 1.4rem;
     }
 
     /* Register Button */
     .register-btn {
       display: block;
-      margin: 30px auto 0 auto;
-      padding: 10px 25px;
+      margin: 30px auto 40px auto;
+      padding: 12px 30px;
       font-size: 1.4rem;
       font-weight: bold;
       color: #fff;
@@ -172,31 +183,252 @@
       box-shadow: 0 6px 25px rgba(255, 65, 108, 0.7);
     }
 
-    /* Right side poster */
-    .right-poster {
-      position: absolute;
-      top: 10px;
-      right: 40px;
-      max-width: 380px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 10px 45px rgba(0,0,0,0.6);
-      z-index: 4;
-    }
-    .right-poster img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 18px;
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .content-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .right-poster {
+        flex: none;
+        max-width: 300px;
+        order: -1;
+      }
     }
 
     @media (max-width: 768px) {
-      .overlay { background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.25)); }
-      .left-description { max-width: 85%; font-size: 1.1rem; left: 20px; }
-      .right-poster { display: none; }
-      .grid-2 { grid-template-columns: 1fr; }
-      .top-heading { font-size: 3rem; top: 20px; }
+      .overlay { background: linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.4)); }
+      
+      .top-heading { 
+        font-size: 2.8rem; 
+        margin: 60px 0 20px 0; 
+      }
+      
+      .back-btn {
+        font-size: 1rem;
+        padding: 6px 14px;
+      }
+      
+      .content-container {
+        padding: 0 15px;
+      }
+      
+      .left-description { 
+        font-size: 1.2rem; 
+        padding: 20px;
+      }
+      
+      .right-poster { 
+        max-width: 250px;
+        margin-bottom: 20px;
+      }
+      
+      .grid-2 { 
+        grid-template-columns: 1fr; 
+        gap: 15px;
+      }
+      
+      .info-block {
+        font-size: 1.2rem;
+        padding: 15px;
+      }
+      
+      .info-block h2 {
+        font-size: 1.5rem;
+      }
+      
+      .info-block ul li {
+        font-size: 1.2rem;
+      }
+      
+      .tagline {
+        font-size: 1.4rem;
+      }
+      
+      .register-btn {
+        font-size: 1.2rem;
+        padding: 10px 25px;
+      }
     }
+
+    @media (max-width: 480px) {
+      .top-heading { 
+        font-size: 2.2rem; 
+        margin: 50px 0 15px 0;
+      }
+      
+      .left-description { 
+        font-size: 1.1rem; 
+        padding: 15px;
+      }
+      
+      .right-poster { 
+        max-width: 200px;
+      }
+      
+      .info-block {
+        font-size: 1.1rem;
+        padding: 12px;
+      }
+      
+      .info-block h2 {
+        font-size: 1.3rem;
+      }
+      
+      .info-block ul li {
+        font-size: 1.1rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+    }
+    .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 99999;
+  background: rgba(10,14,21,0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  
+}
+
+.nav-container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--page-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: Orbitron, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #00ffe0;
+  text-shadow: 0 0 6px #a060ff;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  color: #f2d9ff;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ff6bff;
+  text-shadow: 0 0 8px #a060ff;
+}
+
+/* For mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 16px;
+    font-size: 0.9rem;
+  }
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+}
+/* Fix overlap for small screens */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px; /* spacing between stacked items */
+  }
+
+  .brand {
+    position: relative; /* remove absolute positioning */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .brand .title {
+    font-size: 2rem; /* shrink font for mobile */
+  }
+
+  .holo-wrapper {
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .card {
+    margin-top: 20px;
+  }
+}
+
+/* Even smaller devices (phones < 425px) */
+@media (max-width: 425px) {
+  .brand .title {
+    font-size: 1.6rem;
+  }
+  .container {
+    width: 180px;
+    height: 180px;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+    .hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #00ffe0;
+  cursor: pointer;
+}
+
+/* Mobile navbar */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    z-index: 1001;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background: rgba(10,14,21,0.95);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    display: none; /* hidden initially */
+  }
+
+  .nav-links.show {
+    display: flex; /* appears when toggled */
+  }
+}
   </style>
 </head>
 <body>
@@ -207,99 +439,124 @@
         Your browser does not support the HTML5 video tag.
       </video>
     </div>
-
     <div class="overlay"></div>
 
     <!-- Back Button -->
-   <button class="back-btn" ><a href="../plietogliea/index.html">←Back</a></button>
+    <button class="back-btn" ><a href="../plietogliea/index.html">←Back</a></button>
+  
 
     <!-- Top Center Heading -->
     <div class="top-heading">Royal Rumble</div>
 
-    <!-- Left Side Description -->
-    <div class="left-description">
-      <p class="tagline"><i class="fa-solid fa-gamepad"></i> <em>“Drop in. Gear up. Rule the battlefield.”</em></p>
+    <!-- Content Container -->
+    <div class="content-container">
+      <!-- Left Side Description -->
+      <div class="left-description">
+        <p class="tagline"><i class="fa-solid fa-gamepad"></i> <em>"Drop in. Gear up. Rule the battlefield."</em></p>
 
-      <div class="info-block">
-        <h2><i class="fa-solid fa-book-open"></i> Event Concept</h2>
-        <p>
-          Royal Rumble: Firefight Edition is an adrenaline-pumping Free Fire tournament where squads
-          compete to be the <span class="highlight">last team standing</span>. Strategy, fast-paced action, and teamwork
-          decide who takes the crown. With a small entry fee, players can showcase their skills and win
-          exciting prizes!
-        </p>
-      </div>
-
-      <div class="grid-2">
         <div class="info-block">
-          <h2><i class="fa-solid fa-users"></i> Team Formation</h2>
-          <ul>
-            <li>Teams of 4 players</li>
-            <li>Max <span class="highlight">24 teams</span></li>
-           
-          </ul>
+          <h2><i class="fa-solid fa-book-open"></i> Event Concept</h2>
+          <p>
+            Royal Rumble: Firefight Edition is an adrenaline-pumping Free Fire tournament where squads
+            compete to be the <span class="highlight">last team standing</span>. Strategy, fast-paced action, and teamwork
+            decide who takes the crown. With a small entry fee, players can showcase their skills and win
+            exciting prizes!
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="info-block">
+            <h2><i class="fa-solid fa-users"></i> Team Formation</h2>
+            <ul>
+              <li>Teams of 4 players</li>
+              <li>Max <span class="highlight">24 teams</span></li>
+              <li>Entry Fee: <span class="highlight">₹50</span> per team</li>
+            </ul>
+          </div>
+
+          <div class="info-block">
+            <h2><i class="fa-solid fa-trophy"></i> Prize Distribution</h2>
+            <ul>
+              <li>1st Place: 50%</li>
+              <li>2nd Place: 30%</li>
+              <li>3rd Place: 20%</li>
+            </ul>
+          </div>
         </div>
 
         <div class="info-block">
-          <h2><i class="fa-solid fa-trophy"></i> Prize Distribution</h2>
-          <ul>
-            <li>1st Place: 50%</li>
-            <li>2nd Place: 30%</li>
-            <li>3rd Place: 20%</li>
-          </ul>
+          <h2><i class="fa-solid fa-scroll"></i> Event Format</h2>
+          <p><b>Qualifier Round:</b> 3 matches → Top 8 teams advance</p>
+          <p><b>Final Round:</b> 3–5 matches → Total points decide champion</p>
+          <h3><i class="fa-solid fa-crosshairs"></i> Scoring System</h3>
+          <p>
+            🥇 <span class="highlight">25 pts</span> | 🥈 20 pts | 🥉 16 pts | Kill = <span class="highlight">2 pts</span>
+          </p>
         </div>
-      </div>
 
-      <div class="info-block">
-        <h2><i class="fa-solid fa-scroll"></i> Event Format</h2>
-        <p><b>Qualifier Round:</b> 3 matches → Top 8 teams advance</p>
-        <p><b>Final Round:</b> 3–5 matches → Total points decide champion</p>
-        <h3><i class="fa-solid fa-crosshairs"></i> Scoring System</h3>
-        <p>
-          🥇 <span class="highlight">25 pts</span> | 🥈 20 pts | 🥉 16 pts | Kill = <span class="highlight">2 pts</span>
-        </p>
-      </div>
+        <div class="grid-2">
+          <div class="info-block">
+            <h2><i class="fa-solid fa-clock"></i> Timeframe</h2>
+            <ul>
+              <li>Total: 4–5 hours</li>
+              <li>Each match: ~20 mins</li>
+              <li>Breaks between rounds</li>
+            </ul>
+          </div>
 
-      <div class="grid-2">
+          <div class="info-block">
+            <h2><i class="fa-solid fa-scale-balanced"></i> Fair Play</h2>
+            <ul>
+              <li>Anti-cheat strictly enforced</li>
+              <li>Results verified with game data</li>
+              <li>Judges' decisions are final</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="info-block">
-          <h2><i class="fa-solid fa-clock"></i> Timeframe</h2>
+          <h2><i class="fa-solid fa-thumbtack"></i> Participant Guidelines</h2>
           <ul>
-            <li>Total: 4–5 hours</li>
-            <li>Each match: ~20 mins</li>
-            <li>Breaks between rounds</li>
+            <li>Register & pay before deadline</li>
+            <li>Use consistent team names & IDs</li>
+            <li>Be on time for lobby setup</li>
+            <li>Maintain sportsmanship</li>
           </ul>
         </div>
 
-        <div class="info-block">
-          <h2><i class="fa-solid fa-scale-balanced"></i> Fair Play</h2>
-          <ul>
-            <li>Anti-cheat strictly enforced</li>
-            <li>Results verified with game data</li>
-            <li>Judges’ decisions are final</li>
-          </ul>
-        </div>
+        <!-- Register Button -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCKIMSBPSGYBlaBAKoIiWn_DJpeJvVDZL_NueER4-dEXIhKw/viewform?usp=dialog" class="register-btn">
+          <i class="fa-solid fa-bolt"></i> Register Now
+        </a>
       </div>
 
-      <div class="info-block">
-        <h2><i class="fa-solid fa-thumbtack"></i> Participant Guidelines</h2>
-        <ul>
-          <li>Register & pay before deadline</li>
-          <li>Use consistent team names & IDs</li>
-          <li>Be on time for lobby setup</li>
-          <li>Maintain sportsmanship</li>
-        </ul>
+      <!-- Right Side Poster -->
+      <div class="right-poster">
+        <img src="img/poster.jpeg" alt="Royal Rumble Poster" />
       </div>
-
-      <!-- Register Button -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCKIMSBPSGYBlaBAKoIiWn_DJpeJvVDZL_NueER4-dEXIhKw/viewform?usp=dialog" class="register-btn">
-        <i class="fa-solid fa-bolt"></i> Register Now
-      </a>
-    </div>
-
-    <!-- Right Side Poster -->
-    <div class="right-poster">
-      <img src="img/poster.jpeg" alt="Royal Rumble Poster" />
     </div>
   </div>
+  <script>
+    document.addEventListener("mousemove", e => {
+      const particles = document.querySelectorAll(".particles span");
+      let x = (e.clientX / window.innerWidth - 0.5) * 40; // stronger effect
+      let y = (e.clientY / window.innerHeight - 0.5) * 40;
+  
+      particles.forEach((p, i) => {
+        let depth = (i % 6) + 1; // different depths
+      p.style.marginLeft = `${x / depth}px`;
+p.style.marginTop = `${y / depth}px`;
+      });
+    });
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  });
+    
+  </script>
 </body>
 </html>
