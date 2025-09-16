@@ -2260,12 +2260,12 @@ body {
   margin: 30px auto 60px;
   display: block;
   align-items: center;
-  margin-bottom:160px;
+  margin-bottom: 150px;
 
   /* Outline effect */
-  filter: drop-shadow(0 0 3px #ff6b35)   /* orange glow */
-          drop-shadow(0 0 6px #000000)   /* black stroke */
-          drop-shadow(0 0 10px #ff6b35); /* stronger outer glow */
+  filter: drop-shadow(0 0 3px #743912)   /* orange glow */
+          drop-shadow(0 0 6px #020100)   /* black stroke */
+          drop-shadow(0 0 10px #2b1405); /* stronger outer glow */
 }
 
 @media (max-width: 480px) {
@@ -2276,9 +2276,10 @@ body {
     align-items: center;
 
     /* Outline effect (mobile only) */
-    filter: drop-shadow(0 0 3px #ff6b35)   /* orange glow */
-            drop-shadow(0 0 6px #000000)   /* black stroke */
-            drop-shadow(0 0 10px #ff6b35); /* stronger outer glow */
+    filter: drop-shadow(0 0 3px #743912)   /* orange glow */
+            drop-shadow(0 0 6px #020100)   /* black stroke */
+            drop-shadow(0 0 10px #2b1405); /* stronger outer glow */
   }
 }
+
 
