@@ -523,54 +523,82 @@
 }
       /* Darker overlay for better visibility */
       .event-card {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        overflow: hidden;
-        min-height: 350px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 2rem;
-        color: #fff;
-        border-radius: 15px;
-        border: 2px solid rgba(255, 107, 53, 0.3);
-      }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 107, 53, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+   
+}
+/* Dark blur overlay */
+.event-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(3px);
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  z-index: 0; /* stays below text */
+}
 
-      .event-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.75); /* darker overlay */
-        backdrop-filter: blur(3px);       /* blur background slightly */
-        z-index: 0;
-      }
+/* Remove blur/darken on hover */
+.event-card:hover::before {
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(0px);
+}
 
-      .event-card h3,
-      .event-card p,
-      .event-card a {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-      }
+/* Make sure text stays above overlay */
+.event-card h3,
+.event-card p,
+.event-card a {
+  position: relative;
+  z-index: 1;
+}
 
-      .event-card h3 {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: #ffae42; 
-        margin-bottom: 0.8rem;
-        text-shadow: 0 0 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6);
-      }
+/* Title style */
+.event-card h3 {
+  color: #ffae42;
+  margin-bottom: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0,0,0,0.9);
+}
 
-      .event-card p {
-        color: #ffffff;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        text-shadow: 0 0 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6);
-      }
+/* Description style */
+.event-card p {
+  color: #fff;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
 
+/* Button style */
+.submit-btn {
+  background: linear-gradient(135deg, #ff6b35, #ffa500);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff6b35;
+}
     </style>
   </head>
 
