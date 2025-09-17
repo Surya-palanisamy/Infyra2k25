@@ -549,7 +549,7 @@ body {
 /* Dots indicator */
 .dots-container {
   position: absolute;
-  bottom: -140px;
+  bottom: -120px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
