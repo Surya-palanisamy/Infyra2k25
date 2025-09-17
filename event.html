@@ -522,7 +522,7 @@
   margin-top: 10px;
 }
       /* Darker overlay for better visibility */
-  .event-card {
+.event-card {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -548,6 +548,29 @@
   backdrop-filter: blur(3px);
   transition: background 0.4s ease, backdrop-filter 0.4s ease;
   z-index: 0; /* stays below text */
+}
+/* Default: clear + text visible */
+.event-card {
+  filter: none;
+  transition: filter 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card h3,
+.event-card p {
+  opacity: 1; /* Text visible */
+  transition: opacity 0.3s ease;
+}
+
+/* Hover: blur + hide text */
+.event-card:hover {
+  filter: blur(0px);
+}
+
+.event-card:hover h3,
+.event-card:hover p {
+  opacity: 0; /* Text hidden */
 }
 
 /* Remove blur/darken on hover */
