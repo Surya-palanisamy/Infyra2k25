@@ -155,6 +155,14 @@ function handleOutsideClick(event) {
 }
 
 
+// Coverflow variables
+
+const prevBtn = document.getElementById("prevBtn")
+const nextBtn = document.getElementById("nextBtn")
+
+
+let autoplayDelayTimeout
+
 // Coverflow functionality
 function initializeCoverflow() {
   if (!items.length || !dotsContainer) return
@@ -163,7 +171,7 @@ function initializeCoverflow() {
   items.forEach((_, index) => {
     const dot = document.createElement("div")
     dot.className = "dot"
-    dot.onclick = () => goToIndex(index)
+    dot.onclick = () => userGoToIndex(index)
     dotsContainer.appendChild(dot)
   })
 
@@ -172,8 +180,12 @@ function initializeCoverflow() {
 
   // Click on items to select
   items.forEach((item, index) => {
-    item.addEventListener("click", () => goToIndex(index))
+    item.addEventListener("click", () => userGoToIndex(index))
   })
+
+  // Prev / Next button listeners
+  if (prevBtn) prevBtn.addEventListener("click", () => userGoToIndex(currentIndex - 1))
+  if (nextBtn) nextBtn.addEventListener("click", () => userGoToIndex(currentIndex + 1))
 }
 
 function updateCoverflow() {
@@ -206,11 +218,11 @@ function updateCoverflow() {
     }
 
     item.style.transform = `
-            translateX(${translateX}px) 
-            translateZ(${translateZ}px) 
-            rotateY(${rotateY}deg)
-            scale(${scale})
-        `
+      translateX(${translateX}px) 
+      translateZ(${translateZ}px) 
+      rotateY(${rotateY}deg)
+      scale(${scale})
+    `
     item.style.opacity = opacity
     item.style.zIndex = 100 - absOffset
 
@@ -228,18 +240,38 @@ function updateCoverflow() {
 
 function goToIndex(index) {
   if (isAnimating || index === currentIndex || !items.length) return
-  currentIndex = index
+  currentIndex = (index + items.length) % items.length // loop
   updateCoverflow()
 }
 
-function startAutoplay() {
-  if (!items.length) return
+// 🔹 wrapper for user interactions (prev/next/dots/item)
+function userGoToIndex(index) {
+  stopAutoplay() // pause autoplay
+  goToIndex(index)
+  restartAutoplayAfterDelay()
+}
 
+function startAutoplay() {
+  stopAutoplay()
   autoplayInterval = setInterval(() => {
     currentIndex = (currentIndex + 1) % items.length
     updateCoverflow()
   }, 4000)
 }
+
+function stopAutoplay() {
+  clearInterval(autoplayInterval)
+  clearTimeout(autoplayDelayTimeout)
+}
+
+function restartAutoplayAfterDelay() {
+  autoplayDelayTimeout = setTimeout(() => {
+    startAutoplay()
+  }, 6000) // restart autoplay after 6s idle
+}
+
+// Init
+initializeCoverflow()
 
 // Countdown functionality
 const FULL_CIRCUMFERENCE = 2 * Math.PI * 45 // 2πr, r=45
