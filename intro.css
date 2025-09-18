@@ -782,11 +782,11 @@ body {
   font-weight: bold;
 }
 .logo-text img{
-  height: 250px;
-  margin-left: -70px;
+  height: 180px;
+  margin-left: -60px;
   margin-top: 10px;
+  
 }
-
 .register-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
